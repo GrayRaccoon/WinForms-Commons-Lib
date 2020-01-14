@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CommonsLib_FLL")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("GR.WinForms.CommonsLib.FLL")]
+[assembly: AssemblyDescription("Windows Forms Commons project for Forms Library Layer.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CommonsLib_FLL")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Gray Raccoon")]
+[assembly: AssemblyProduct("GR.WinForms.CommonsLib.FLL")]
+[assembly: AssemblyCopyright("Copyright 2020 CompanyLtd")]
+[assembly: AssemblyTrademark("Gray Raccoon")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

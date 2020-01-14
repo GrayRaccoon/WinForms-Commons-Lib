@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<package>
+  <metadata>
+    <id>GR.WinForms.CommonsLib.FLL</id>
+    <version>1.0.0</version>
+    <title>GR WinForms Commons-Lib FLL</title>
+    <authors>Heriberto Reyes Esparza</authors>
+    <owners>Gray Raccoon</owners>
+    <icon>images\logo.png</icon>
+    <projectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</projectUrl>
+    <license type="file">LICENSE.</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Windows Forms Commons project for Forms Library Layer.</description>
+    <releaseNotes>Initial 1.0.0 release</releaseNotes>
+    <copyright>Copyright 2020 CompanyLtd</copyright>
+    <tags>WinForms GR</tags>
+    <dependencies>
+      <group targetFramework="net46">
+        <dependency id="GR.WinForms.CommonsLib.DAL" version="1.0.1" />
+        <dependency id="GR.WinForms.CommonsLib.BLL" version="1.0.0" />
+      </group>
+    </dependencies>
+    <summary>Windows Forms Commons project for Forms Library Layer.</summary>
+  </metadata>
+  <files>
+    <file src="bin\Release\CommonsLib_FLL.dll" target="lib\net46" />
+    <file src="bin\Release\CommonsLib_FLL.dll.config" target="lib\net46" />
+    <file src="bin\Release\CommonsLib_FLL.pdb" target="lib\net46" />
+    <file src="..\LICENSE" target="LICENSE." />
+    <file src="..\logo.png" target="images\" />
+  </files>
+</package>
