@@ -74,6 +74,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="CHANGELOG.md" />
     <None Include="GR.WinForms.CommonsLib.FLL.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

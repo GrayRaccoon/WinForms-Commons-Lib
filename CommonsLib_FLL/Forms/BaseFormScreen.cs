@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonsLib_DAL.Data;
 using Serilog.Core;
@@ -91,5 +92,40 @@ namespace CommonsLib_FLL.Forms
             this.Cursor = Cursor.Current = Cursors.Default;
         }
 
+
+        /// <summary>
+        /// Runs a sent Action in the UI Thread.
+        /// </summary>
+        /// <param name="uiTask">Task to run on UI Thread.</param>
+        public void RunOnUiThread(Action uiTask)
+        {
+            Invoke((MethodInvoker)delegate { uiTask(); });
+        }
+
+        /// <summary>
+        /// Runs a sent Action in the UI Thread and waits for its completion.
+        /// </summary>
+        /// <param name="uiTask">Task to run on UI Thread</param>
+        /// <typeparam name="T">Type of return</typeparam>
+        /// <returns>Generated Task to await.</returns>
+        public Task<T> RunOnUiThread<T>(UiTaskActionWithReturn<T> uiTask)
+        {
+            var t = new TaskCompletionSource<T>();
+            this.RunOnUiThread(() =>
+            {
+                t.TrySetResult(
+                    uiTask()
+                );
+            });
+            return t.Task;
+        }
+        
     }
+    
+    /// <summary>
+    /// Delegate to use while calling RunOnUiThread.
+    /// </summary>
+    /// <typeparam name="T">Expected return type.</typeparam>
+    public delegate T UiTaskActionWithReturn<out T>();
+
 }

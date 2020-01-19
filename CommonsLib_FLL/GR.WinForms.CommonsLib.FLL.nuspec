@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>GR.WinForms.CommonsLib.FLL</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>GR WinForms Commons-Lib FLL</title>
     <authors>Heriberto Reyes Esparza</authors>
     <owners>Gray Raccoon</owners>
@@ -11,7 +11,7 @@
     <license type="file">LICENSE.</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Windows Forms Commons project for Forms Library Layer.</description>
-    <releaseNotes>Initial 1.0.0 release</releaseNotes>
+    <releaseNotes>Added RunOnUiThread methods on BaseFormScreen.</releaseNotes>
     <copyright>Copyright 2020 CompanyLtd</copyright>
     <tags>WinForms GR</tags>
     <dependencies>
