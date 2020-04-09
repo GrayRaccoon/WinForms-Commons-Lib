@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonsLib_DAL.Data;
-using Serilog.Core;
+using Serilog;
 
 namespace CommonsLib_FLL.Forms
 {
@@ -10,9 +9,16 @@ namespace CommonsLib_FLL.Forms
     /// Use this base class to get some base form functions and 
     /// to have a common class to integrate with the ActivityManager Stack.
     /// </summary>
-    public class BaseFormScreen : Form
+    public abstract class BaseFormScreen : Form
     {
-        protected Logger Logger => LocalLogger.MainLogger;
+        private ILogger _logger;
+
+        public ILogger Logger
+        {
+            get => _logger;
+            set => _logger = value.ForContext(GetType());
+        }
+
 
         /// <summary>
         /// Finish Form life cycle by trying to: hide, close and then dispose current form object.
@@ -75,6 +81,18 @@ namespace CommonsLib_FLL.Forms
                 ActivityManager.Instance.LastFormLocation = this.Location;
             }
         }
+
+
+        /// <summary>
+        /// Generic click handler for cancel buttons.
+        /// </summary>
+        /// <param name="sender">Button clicked.</param>
+        /// <param name="args">Event arguments.</param>
+        protected void OnCancelClick_Handler(object sender, EventArgs args)
+        {
+            Finish();
+        }
+
 
         /// <summary>
         /// Activate loading cursor, call this method before starting a long blocking process.

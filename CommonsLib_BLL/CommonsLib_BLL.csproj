@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>GR.WinForms.CommonsLib.BLL</PackageId>
+    <PackageId>GR.CommonsLib.BLL</PackageId>
     <Authors>Heriberto Reyes Esparza</Authors>
     <Company>Gray Raccoon</Company>
-    <Product>GR.WinForms.CommonsLib.BLL</Product>
+    <Product>GR.CommonsLib.BLL</Product>
     <Description>Windows Forms Commons project for Business Logic Layer.</Description>
     <Copyright>Copyright 2020 CompanyLtd</Copyright>
     <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
@@ -16,6 +16,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>WinForms GR</PackageTags>
     <PackageReleaseNotes>Initial 1.0.0 release</PackageReleaseNotes>
+    <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageVersion>1.0.0.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

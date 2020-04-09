@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <package>
   <metadata>
-    <id>GR.WinForms.CommonsLib.FLL</id>
-    <version>1.0.1</version>
+    <id>GR.CommonsLib.FLL</id>
+    <version>1.0.1.2</version>
     <title>GR WinForms Commons-Lib FLL</title>
     <authors>Heriberto Reyes Esparza</authors>
     <owners>Gray Raccoon</owners>
@@ -16,16 +16,17 @@
     <tags>WinForms GR</tags>
     <dependencies>
       <group targetFramework="net46">
-        <dependency id="GR.WinForms.CommonsLib.DAL" version="1.0.1" />
-        <dependency id="GR.WinForms.CommonsLib.BLL" version="1.0.0" />
+        <dependency id="GR.CommonsLib.DAL" version="1.0.1.2" />
+        <dependency id="GR.CommonsLib.BLL" version="1.0.0.2" />
       </group>
     </dependencies>
     <summary>Windows Forms Commons project for Forms Library Layer.</summary>
   </metadata>
   <files>
-    <file src="bin\Release\CommonsLib_FLL.dll" target="lib\net46" />
-    <file src="bin\Release\CommonsLib_FLL.dll.config" target="lib\net46" />
-    <file src="bin\Release\CommonsLib_FLL.pdb" target="lib\net46" />
+    <!-- TODO: Back to Release please! -->
+    <file src="bin\Debug\CommonsLib_FLL.dll" target="lib\net46" />
+    <file src="bin\Debug\CommonsLib_FLL.dll.config" target="lib\net46" />
+    <file src="bin\Debug\CommonsLib_FLL.pdb" target="lib\net46" />
     <file src="..\LICENSE" target="LICENSE." />
     <file src="..\logo.png" target="images\" />
   </files>
