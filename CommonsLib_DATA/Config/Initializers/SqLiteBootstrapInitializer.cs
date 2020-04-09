@@ -49,7 +49,7 @@ namespace CommonsLib_DATA.Config.Initializers
                 }
 
                 // Build connection string.
-                var dbFilePath = BasePathManager.GetFile(LocalDbManager.DatabaseFile);
+                var dbFilePath = LocalDbManager.DatabaseFile;
                 var msConnString = $"Data Source={dbFilePath};";
                 var sqliteConnection = new SqliteConnection(msConnString);
 

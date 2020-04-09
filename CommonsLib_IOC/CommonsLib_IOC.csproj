@@ -17,6 +17,18 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>dotNet WinForms GR</PackageTags>
         <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="5.1.2" />
+      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    </ItemGroup>
 
 </Project>
