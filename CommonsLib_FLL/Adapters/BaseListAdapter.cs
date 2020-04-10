@@ -20,9 +20,9 @@ namespace CommonsLib_FLL.Adapters
         /// <summary>
         /// Item Click Event.
         /// </summary>
-        public event Action<TItem> OnItemClicked;
+        public event Action<TItem>? OnItemClicked;
 
-        public event Action<TItem> OnItemDoubleClicked;
+        public event Action<TItem>? OnItemDoubleClicked;
 
         /// <summary>
         /// Set String Array with ListView Columns Name.

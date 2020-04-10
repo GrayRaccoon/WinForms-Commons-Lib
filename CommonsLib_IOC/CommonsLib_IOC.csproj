@@ -5,10 +5,10 @@
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>GR.CommonsLib.IOC</PackageId>
-        <PackageVersion>0.0.0.1</PackageVersion>
+        <PackageVersion>0.0.0.2</PackageVersion>
         <Title>Gr Commons Lib IoC</Title>
         <Authors>Heriberto Reyes Esparza</Authors>
-        <Description>Windows Forms Commons project for IoC configuration .</Description>
+        <Description>Windows Forms Commons project for IoC configuration.</Description>
         <Copyright>Copyright 2020 CompanyLtd</Copyright>
         <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
         <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>

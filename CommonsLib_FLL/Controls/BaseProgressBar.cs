@@ -11,11 +11,11 @@ namespace CommonsLib_FLL.Controls
     {
 
         // Private attributes
-        private Bitmap _bmp;
-        private PictureBox _pictureBox;
+        private Bitmap? _bmp;
+        private PictureBox? _pictureBox;
 
-        private Color _bgColor;
-        private Color _activeColor;
+        private Color _bgColor = Color.PowderBlue;
+        private Color _activeColor = Color.LightSeaGreen;
 
 
         /// <summary>

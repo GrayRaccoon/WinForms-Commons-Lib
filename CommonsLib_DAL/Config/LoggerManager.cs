@@ -9,18 +9,26 @@ namespace CommonsLib_DAL.Config
     {
 
         /// <summary>
-        /// Log file Name, update if required it will reset existing MainLogger.
+        /// Log file Name.
         /// </summary>
-        public static string LogFileName { get; set; } = "log/application.log";
+        public static string LogFileName { get; set; } = "logs/application.log";
+
+        /// <summary>
+        /// Logger Output Template.
+        /// </summary>
+        public static string LogOutputTemplate { get; set; } = 
+            "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}";
 
         /// <summary>
         /// Application logger instance.
         /// We will work with a single logger so that all output will end in the same file.
         /// </summary>
         public static ILogger MainLogger { get; set; } = new LoggerConfiguration()
-            .WriteTo.Console()
+            .Enrich.FromLogContext()
+            .WriteTo.Console(outputTemplate: LogOutputTemplate)
             .WriteTo.File(LogFileName,
                 rollingInterval: RollingInterval.Day,
+                outputTemplate: LogOutputTemplate,
                 shared: true)
             .CreateLogger();
         

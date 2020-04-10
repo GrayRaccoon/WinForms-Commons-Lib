@@ -24,7 +24,8 @@ namespace CommonsLib_IOC.Config.Initializers
         /// </summary>
         public readonly List<string> ComponentNamespaces = new List<string>
         {
-            nameof(CommonsLib_DATA)
+            nameof(CommonsLib_DATA),
+            nameof(CommonsLib_BLL)
         };
 
         /// <summary>

@@ -2,6 +2,22 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>GR.CommonsLib.APP</PackageId>
+        <PackageVersion>0.0.0.1</PackageVersion>
+        <Title>Gr Commons Lib APP</Title>
+        <Authors>Heriberto Reyes Esparza</Authors>
+        <Description>Windows Forms Commons project for App base configuration.</Description>
+        <Copyright>Copyright 2020 CompanyLtd</Copyright>
+        <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
+        <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
+        <PackageIconUrl>https://www.grayraccoon.com/images/logo.png</PackageIconUrl>
+        <RepositoryUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>dotNet WinForms GR</PackageTags>
+        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
     </PropertyGroup>
 
 </Project>
