@@ -20,4 +20,11 @@
         <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
+      <ProjectReference Include="..\CommonsLib_IOC\CommonsLib_IOC.csproj" />
+    </ItemGroup>
+
 </Project>

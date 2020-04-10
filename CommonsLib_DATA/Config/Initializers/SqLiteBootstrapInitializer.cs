@@ -54,7 +54,8 @@ namespace CommonsLib_DATA.Config.Initializers
                 var sqliteConnection = new SqliteConnection(msConnString);
 
                 // Apply Migrations.
-                var evolve = new Evolve.Evolve(sqliteConnection, LoggerManager.MainLogger.Information)
+                var evolve = new Evolve.Evolve(sqliteConnection, 
+                    LoggerManager.MainLogger.ForContext<SqLiteBootstrapInitializer>().Information)
                 {
                     EmbeddedResourceAssemblies = embeddedMigrationAssemblies.ToArray(),
                     EmbeddedResourceFilters = embeddedMigrationsFilters.ToArray(),
