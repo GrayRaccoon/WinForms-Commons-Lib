@@ -12,4 +12,27 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CommonsLib_APP\CommonsLib_APP.csproj" />
+      <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+      <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
+      <ProjectReference Include="..\CommonsLib_IOC\CommonsLib_IOC.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="db\**\*.sql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="appsettings.json" />
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings-post.json" />
+      <Content Include="appsettings-post.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

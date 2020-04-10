@@ -34,7 +34,8 @@ namespace CommonsLib_IOC.Config.Initializers
         public List<Module> ExternalIoCModules { get; } = new List<Module>
         {
             new LocalDbModule(),
-            new LoggerModule()
+            new LoggerModule(),
+            new GlobalConfigModule()
         };
 
 
