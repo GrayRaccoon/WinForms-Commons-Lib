@@ -7,13 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.1] - 2020-04-11
-
-### Added base configuration manager.
-### Added Process runner.
-
-## [1.0.0] - 2020-01-14
+## [1.0.0] - 2020-04-11
 
 ### Initial 1.0.0 Release
-
+### Added some data attributes for entities.
+### Added base SQLite config.
+### Added base data repositories.
+### Added base for simple syncing.
 

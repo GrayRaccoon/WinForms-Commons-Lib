@@ -7,13 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2020-04-11
+
+### Added Error ui utility.
+### Added BaseAdapter for WinForms ListView. 
+
 ## [1.0.1] - 2020-01-19
 
-### Added
+### Added RunOnUiThread methods on BaseFormScreen.
 
-- Added RunOnUiThread methods on BaseFormScreen.
-
-## [1.0.0] - 2017-06-20
+## [1.0.0] - 2020-01-14
 
 ### Initial 1.0.0 Release
 
