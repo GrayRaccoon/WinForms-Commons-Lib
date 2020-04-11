@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>GR.WinForms.CommonsLib.BLL</PackageId>
+    <PackageId>GR.CommonsLib.BLL</PackageId>
     <Authors>Heriberto Reyes Esparza</Authors>
     <Company>Gray Raccoon</Company>
-    <Product>GR.WinForms.CommonsLib.BLL</Product>
+    <Product>GR.CommonsLib.BLL</Product>
     <Description>Windows Forms Commons project for Business Logic Layer.</Description>
     <Copyright>Copyright 2020 CompanyLtd</Copyright>
     <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
@@ -16,10 +16,18 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>WinForms GR</PackageTags>
     <PackageReleaseNotes>Initial 1.0.0 release</PackageReleaseNotes>
+    <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageVersion>1.0.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerBase" Version="2.4.3" />
   </ItemGroup>
 
 </Project>

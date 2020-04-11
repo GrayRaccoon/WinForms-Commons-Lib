@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GR.WinForms.CommonsLib.FLL")]
+[assembly: AssemblyTitle("GR.CommonsLib.FLL")]
 [assembly: AssemblyDescription("Windows Forms Commons project for Forms Library Layer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Gray Raccoon")]
-[assembly: AssemblyProduct("GR.WinForms.CommonsLib.FLL")]
+[assembly: AssemblyProduct("GR.CommonsLib.FLL")]
 [assembly: AssemblyCopyright("Copyright 2020 CompanyLtd")]
 [assembly: AssemblyTrademark("Gray Raccoon")]
 [assembly: AssemblyCulture("")]

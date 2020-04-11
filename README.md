@@ -1,2 +1,2 @@
-# WinForms-Commons-Lib
-Common Utilities for Windows Forms Projects.
+# Dot-net-Commons-Lib
+Common Utilities for Dot net Projects.
