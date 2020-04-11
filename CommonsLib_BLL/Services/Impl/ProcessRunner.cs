@@ -22,10 +22,10 @@ namespace CommonsLib_BLL.Services.Impl
 
         /// <inheritdoc/>
         public Task<int> RunNewProcess(IEnumerable<string> commands, 
-            string workingDirectory = null, 
+            string workingDirectory = ".", 
             string runner = "bash", 
-            Action<string> onDataLine = null,
-            Action<string> onErrorLine = null)
+            Action<string>? onDataLine = null,
+            Action<string>? onErrorLine = null)
         {
             return Task.Run(() =>
             {

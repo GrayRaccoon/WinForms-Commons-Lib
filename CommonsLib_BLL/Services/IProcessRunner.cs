@@ -23,8 +23,8 @@ namespace CommonsLib_BLL.Services
             IEnumerable<string> commands, 
             string workingDirectory = ".",
             string runner = "bash",
-            Action<string> onDataLine = null,
-            Action<string> onErrorLine = null);
+            Action<string>? onDataLine = null,
+            Action<string>? onErrorLine = null);
     }
 
 }

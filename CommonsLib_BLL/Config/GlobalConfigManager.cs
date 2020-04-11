@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 
 namespace CommonsLib_BLL.Config
@@ -25,6 +26,6 @@ namespace CommonsLib_BLL.Config
         /// <summary>
         /// Global configuration root instance.
         /// </summary>
-        public static IConfigurationRoot ConfigRoot { get; set; }
+        public static IConfigurationRoot ConfigRoot { get; set; } = new ConfigurationRoot(new List<IConfigurationProvider>());
     }
 }

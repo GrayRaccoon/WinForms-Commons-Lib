@@ -114,7 +114,7 @@ namespace CommonsLib_FLL.Adapters
         private void AdapterListView_DoubleClickHandler(object sender, EventArgs e)
         {
             var selectedItem = SelectedItem;
-            if (SelectedItem == null)
+            if (selectedItem == null)
                 return;
             OnItemDoubleClicked?.Invoke(selectedItem);
         }
