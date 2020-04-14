@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using CommonsLib_DAL.Attributes;
+using CommonsLib_DAL.Config;
 using Serilog;
 
 namespace CommonsLib_BLL.Services.Impl
@@ -11,7 +12,7 @@ namespace CommonsLib_BLL.Services.Impl
     [Component]
     public class ProcessRunner: IProcessRunner
     {
-        private ILogger _logger;
+        private ILogger _logger = LoggerManager.MainLogger;
 
         public ILogger Logger
         {
@@ -44,14 +45,14 @@ namespace CommonsLib_BLL.Services.Impl
                 process.OutputDataReceived += (sender, args) =>
                 {
                     var data = args.Data;
-                    _logger.Information(data);
+                    Logger.Information(data);
                     onDataLine?.Invoke(data);
                 };
                 
                 process.ErrorDataReceived += (sender, args) =>
                 {
                     var data = args.Data;
-                    _logger.Error(data);
+                    Logger.Error(data);
                     onErrorLine?.Invoke(data);
                 };
                 

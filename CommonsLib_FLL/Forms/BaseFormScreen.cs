@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CommonsLib_DAL.Config;
 using Serilog;
 
 namespace CommonsLib_FLL.Forms
@@ -9,9 +10,9 @@ namespace CommonsLib_FLL.Forms
     /// Use this base class to get some base form functions and 
     /// to have a common class to integrate with the ActivityManager Stack.
     /// </summary>
-    public abstract class BaseFormScreen : Form
+    public class BaseFormScreen : Form
     {
-        private ILogger _logger;
+        private ILogger _logger = LoggerManager.MainLogger;
 
         public ILogger Logger
         {

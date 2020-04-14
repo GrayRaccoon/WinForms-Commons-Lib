@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CommonsLib_DAL.Config;
 using CommonsLib_DAL.Data;
 using CommonsLib_DAL.Data.Impl;
 using CommonsLib_DAL.Errors;
@@ -9,6 +10,7 @@ using CommonsLib_DAL.Extensions;
 using CommonsLib_DAL.Utils;
 using CommonsLib_DATA.Attributes;
 using CommonsLib_DATA.Errors;
+using Serilog;
 using SQLite;
 
 namespace CommonsLib_DATA.Repositories.Impl
@@ -18,7 +20,14 @@ namespace CommonsLib_DATA.Repositories.Impl
         : IDataRepository<TEntity, TId>
         where TEntity : class, new()
     {
+        private ILogger _logger = LoggerManager.MainLogger;
 
+        public ILogger Logger
+        {
+            get => _logger;
+            set => _logger = value.ForContext(GetType());
+        }
+        
         public SQLiteAsyncConnection SqLiteConnection { get; set; }
 
         protected DataRepository() { }
@@ -27,7 +36,9 @@ namespace CommonsLib_DATA.Repositories.Impl
         public async Task<string> FetchTableName()
         {
             var tableMapping = await SqLiteConnection.GetMappingAsync<TEntity>();
-            return tableMapping.TableName;
+            var tableName = tableMapping.TableName; 
+            Logger.Debug($"Fetching Table Name: {tableName}");
+            return tableName;
         }
 
         /// <inheritdoc/>
