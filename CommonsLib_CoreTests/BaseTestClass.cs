@@ -24,11 +24,8 @@ namespace CommonsLib_CoreTests
         public void Setup()
         {
             Teardown(); // Make sure data tear down has run
-            
-            AppBootstrap.Self.BootstrapInitializers.Remove(PreConfigInitializer.Self);
-            AppBootstrap.Self.BootstrapInitializers.Add(PreConfigInitializer.Self);
 
-            AppBootstrap.Self.BootstrapInitializers.Remove(PostConfigInitializer.Self);
+            AppBootstrap.Self.BootstrapInitializers.Add(PreConfigInitializer.Self);
             AppBootstrap.Self.BootstrapInitializers.Add(PostConfigInitializer.Self);
             
             static void StatusLogger(string status)
@@ -92,11 +89,11 @@ namespace CommonsLib_CoreTests
                 GlobalConfigManager.ExternalAppSettingsEnabled = true;
                 GlobalConfigManager.PostAppSettingsEnabled = true;
 
-                GlobalConfigurationBootstrapInitializer.Self.SettingsNamespaces.AddRange(new []
+                GlobalConfigurationBootstrapInitializer.Self.SettingsNamespaces.UnionWith(new []
                 {
                     nameof(CommonsLib_CoreTests)
                 });
-                SqLiteBootstrapInitializer.Self.MigrationsNamespaces.AddRange(new []
+                SqLiteBootstrapInitializer.Self.MigrationsNamespaces.UnionWith(new []
                 {
                     nameof(CommonsLib_CoreTests)
                 });

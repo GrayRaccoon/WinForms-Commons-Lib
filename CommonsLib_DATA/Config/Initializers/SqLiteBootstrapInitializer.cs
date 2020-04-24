@@ -20,7 +20,7 @@ namespace CommonsLib_DATA.Config.Initializers
         /// <summary>
         /// Global migration namespaces list.
         /// </summary>
-        public readonly List<string> MigrationsNamespaces = new List<string>
+        public readonly HashSet<string> MigrationsNamespaces = new HashSet<string>
         {
             nameof(CommonsLib_DATA)
         };
@@ -42,7 +42,7 @@ namespace CommonsLib_DATA.Config.Initializers
                 var embeddedMigrationAssemblies = new List<Assembly>();
                 var embeddedMigrationsFilters = new List<string>();
 
-                foreach (var migrationsNamespace in MigrationsNamespaces.Distinct().ToList())
+                foreach (var migrationsNamespace in MigrationsNamespaces)
                 {
                     embeddedMigrationAssemblies.Add(Assembly.Load(migrationsNamespace));
                     embeddedMigrationsFilters.Add($"{migrationsNamespace}.db");

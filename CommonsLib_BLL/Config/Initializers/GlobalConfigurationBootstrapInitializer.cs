@@ -21,7 +21,7 @@ namespace CommonsLib_BLL.Config.Initializers
         /// <summary>
         /// Global Settings namespaces list.
         /// </summary>
-        public readonly List<string> SettingsNamespaces = new List<string>();
+        public readonly HashSet<string> SettingsNamespaces = new HashSet<string>();
         
         /// <inheritdoc/>
         public string InitializerName => "Global Configuration Initializer";
@@ -37,7 +37,7 @@ namespace CommonsLib_BLL.Config.Initializers
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(BasePathManager.BasePath);
             
-            foreach (var settingsNamespace in SettingsNamespaces.Distinct().ToList())
+            foreach (var settingsNamespace in SettingsNamespaces)
             {
                 var settingsAssembly = Assembly.Load(settingsNamespace);
                 var appSettingsStream = settingsAssembly.GetManifestResourceStream($"{settingsNamespace}.appsettings.json");

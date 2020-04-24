@@ -8,6 +8,9 @@ namespace CommonsLib_IOC.Config.Modules
     /// </summary>
     public class LoggerModule: Module
     {
+        private LoggerModule() {}
+        public static readonly LoggerModule Self = new LoggerModule();
+        
         protected override void Load(ContainerBuilder builder)
         {
             // Register Main Logger

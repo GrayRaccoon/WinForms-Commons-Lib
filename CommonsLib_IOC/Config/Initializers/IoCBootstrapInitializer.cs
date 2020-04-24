@@ -3,10 +3,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
+using CommonsLib_BLL.Config;
 using CommonsLib_DAL.Attributes;
 using CommonsLib_DAL.Extensions;
 using CommonsLib_DAL.Initializers;
 using CommonsLib_IOC.Config.Modules;
+using Microsoft.Extensions.Configuration;
 using Module = Autofac.Module;
 
 namespace CommonsLib_IOC.Config.Initializers
@@ -22,7 +24,7 @@ namespace CommonsLib_IOC.Config.Initializers
         /// <summary>
         /// Component Services namespaces list.
         /// </summary>
-        public readonly List<string> ComponentNamespaces = new List<string>
+        public readonly HashSet<string> ComponentNamespaces = new HashSet<string>
         {
             nameof(CommonsLib_DATA),
             nameof(CommonsLib_BLL)
@@ -31,11 +33,11 @@ namespace CommonsLib_IOC.Config.Initializers
         /// <summary>
         /// Global IoC modules list.
         /// </summary>
-        public List<Module> ExternalIoCModules { get; } = new List<Module>
+        public HashSet<Module> ExternalIoCModules { get; } = new HashSet<Module>
         {
-            new LocalDbModule(),
-            new LoggerModule(),
-            new GlobalConfigModule()
+            LocalDbModule.Self,
+            LoggerModule.Self,
+            GlobalConfigModule.Self
         };
 
 
@@ -67,27 +69,59 @@ namespace CommonsLib_IOC.Config.Initializers
             var assemblies = Self.ComponentNamespaces
                 .Select(Assembly.Load)
                 .ToArray();
-                
-            // Register Implemented Primary components
+
+            // Register Components Not Primary, Not Optional
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t =>
-                    t.HasAttribute<ComponentAttribute>() && 
-                    t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    t.HasAttribute<ComponentAttribute>()
+                    && !t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && !t.HasAttribute<OptionalOnPropertyAttribute>()
+                ).AsImplementedInterfaces()
+                .AsSelf()
+                .PropertiesAutowired()
+                .SingleInstance();
+            
+            // Register Components Not Primary, Optional
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t =>
+                    t.HasAttribute<ComponentAttribute>()
+                    && !t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && t.HasAttribute<OptionalOnPropertyAttribute>()
+                    && GlobalConfigManager.ConfigRoot.GetValue(
+                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().Value,
+                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().DefaultValue)
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
                 .SingleInstance();
 
+            // Register Components Primary, Not Optional
             builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => t.HasAttribute<ComponentAttribute>())
-                .AsImplementedInterfaces()
+                .Where(t =>
+                    t.HasAttribute<ComponentAttribute>()
+                    && t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && !t.HasAttribute<OptionalOnPropertyAttribute>()
+                ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
-                .SingleInstance()
-                .PreserveExistingDefaults();   
-            
+                .SingleInstance();
+
+            // Register Components Primary, Optional
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t =>
+                    t.HasAttribute<ComponentAttribute>()
+                    && t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && t.HasAttribute<OptionalOnPropertyAttribute>()
+                    && GlobalConfigManager.ConfigRoot.GetValue(
+                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().Value,
+                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().DefaultValue)
+                ).AsImplementedInterfaces()
+                .AsSelf()
+                .PropertiesAutowired()
+                .SingleInstance();
+
             // Register externally added components.
-            Self.ExternalIoCModules.ForEach(module => builder.RegisterModule(module));
+            Self.ExternalIoCModules.ToList().ForEach(module => builder.RegisterModule(module));
 
             return builder.Build();
         }
