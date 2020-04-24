@@ -9,7 +9,8 @@ namespace CommonsLib_DAL.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public class OptionalOnPropertyAttribute: Attribute
     {
-        public string Value { get; set; } = string.Empty;
-        public bool DefaultValue { get; set; } = false;
+        public string Property { get; set; } = string.Empty;
+        public string HavingValue { get; set; } = "true"; 
+        public bool MatchIfMissing { get; set; } = false;
     }
 }

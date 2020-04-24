@@ -8,6 +8,7 @@ using CommonsLib_DAL.Attributes;
 using CommonsLib_DAL.Extensions;
 using CommonsLib_DAL.Initializers;
 using CommonsLib_IOC.Config.Modules;
+using CommonsLib_IOC.Extensions;
 using Microsoft.Extensions.Configuration;
 using Module = Autofac.Module;
 
@@ -87,9 +88,8 @@ namespace CommonsLib_IOC.Config.Initializers
                     t.HasAttribute<ComponentAttribute>()
                     && !t.GetAttributeIfExists<ComponentAttribute>().Primary
                     && t.HasAttribute<OptionalOnPropertyAttribute>()
-                    && GlobalConfigManager.ConfigRoot.GetValue(
-                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().Value,
-                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().DefaultValue)
+                    && t.GetAttributeIfExists<OptionalOnPropertyAttribute>()
+                        .Validate(GlobalConfigManager.ConfigRoot)
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
@@ -112,9 +112,8 @@ namespace CommonsLib_IOC.Config.Initializers
                     t.HasAttribute<ComponentAttribute>()
                     && t.GetAttributeIfExists<ComponentAttribute>().Primary
                     && t.HasAttribute<OptionalOnPropertyAttribute>()
-                    && GlobalConfigManager.ConfigRoot.GetValue(
-                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().Value,
-                        t.GetAttributeIfExists<OptionalOnPropertyAttribute>().DefaultValue)
+                    && t.GetAttributeIfExists<OptionalOnPropertyAttribute>()
+                        .Validate(GlobalConfigManager.ConfigRoot)
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
