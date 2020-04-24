@@ -151,6 +151,17 @@ namespace CommonsLib_IOC.Config.Initializers
             }
 
             /// <inheritdoc/>
+            public TService InjectProperties<TService>(TService service)
+            {
+                var container = _container;
+                using (var scope = container.BeginLifetimeScope())
+                {
+                    service = scope.InjectProperties(service);
+                }
+                return service;
+            }
+
+            /// <inheritdoc/>
             public void Dispose()
             {
                 _container?.Dispose();

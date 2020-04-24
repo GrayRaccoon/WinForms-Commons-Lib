@@ -5,7 +5,7 @@
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>GR.CommonsLib.IOC</PackageId>
-        <PackageVersion>1.0.1.1-alpha</PackageVersion>
+        <PackageVersion>1.0.1.2-alpha</PackageVersion>
         <Title>Gr Commons Lib IoC</Title>
         <Authors>Heriberto Reyes Esparza</Authors>
         <Description>Windows Forms Commons project for IoC configuration.</Description>

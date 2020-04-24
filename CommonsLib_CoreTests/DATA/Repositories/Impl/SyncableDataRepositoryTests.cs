@@ -22,9 +22,9 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test]
         public async Task DataFlow_SyncServerId_Test()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
             var lastSuccessfulSyncRepository = IoCManager.Resolver.ResolveInstance<ILastSuccessfulSyncRepository>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection, lastSuccessfulSyncRepository);
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
 
             var tableName = await postsRepository.FetchTableName();
 
@@ -84,16 +84,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 
 
         private interface IPostsRepository : ISyncableDataRepository<PostEntity, int> { }
-        private class PostsRepository : SyncableDataRepository<PostEntity, int>, IPostsRepository
-        {
-            public PostsRepository(SQLiteAsyncConnection sqLiteAsyncConnection,
-                ILastSuccessfulSyncRepository lastSuccessfulSyncRepository
-            )
-            {
-                SqLiteConnection = sqLiteAsyncConnection;
-                LastSuccessfulSyncRepository = lastSuccessfulSyncRepository;
-            }
-        }
+        private class PostsRepository : SyncableDataRepository<PostEntity, int>, IPostsRepository { }
         [Table("post")]
         private class PostEntity
         {
