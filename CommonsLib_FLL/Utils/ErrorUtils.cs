@@ -19,19 +19,7 @@ namespace CommonsLib_FLL.Utils
         /// <param name="ex">Exception caught</param>
         public static void DisplayError(ILogger logger, string errorMessage, Exception ex)
         {
-            GrException grException;
-            if (ex is GrException exception)
-            {
-                grException = exception;
-            }
-            else if(ex.InnerException is GrException innerException)
-            {
-                grException = innerException;
-            }
-            else
-            {
-                grException = new GrException(errorMessage, cause: ex);
-            }
+            var grException = GrException.From(ex, errorMessage);
             logger.Error(grException, 
                 $"{grException.ErrorCode} - {grException.Message} - {errorMessage}");
             MessageBox.Show(errorMessage);

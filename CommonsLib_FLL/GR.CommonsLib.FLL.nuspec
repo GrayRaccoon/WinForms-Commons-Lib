@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>GR.CommonsLib.FLL</id>
-    <version>1.1.2</version>
+    <version>1.1.2.1-alpha</version>
     <title>GR WinForms Commons-Lib FLL</title>
     <authors>Heriberto Reyes Esparza</authors>
     <owners>Gray Raccoon</owners>
@@ -23,9 +23,9 @@
     <summary>Windows Forms Commons project for Forms Library Layer.</summary>
   </metadata>
   <files>
-    <file src="bin\Release\CommonsLib_FLL.dll" target="lib\net46" />
-    <file src="bin\Release\CommonsLib_FLL.dll.config" target="lib\net46" />
-    <file src="bin\Release\CommonsLib_FLL.pdb" target="lib\net46" />
+    <file src="bin\Debug\CommonsLib_FLL.dll" target="lib\net46" />
+    <file src="bin\Debug\CommonsLib_FLL.dll.config" target="lib\net46" />
+    <file src="bin\Debug\CommonsLib_FLL.pdb" target="lib\net46" />
     <file src="..\LICENSE" target="LICENSE." />
     <file src="..\logo.png" target="images\" />
   </files>
