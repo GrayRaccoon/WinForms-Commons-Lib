@@ -19,7 +19,7 @@
     <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
     <Company>Gray Raccoon</Company>
     <Product>GR.CommonsLib.DATA</Product>
-    <PackageVersion>1.0.2.1-alpha</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
