@@ -8,6 +8,9 @@ namespace CommonsLib_IOC.Config.Modules
     /// </summary>
     public class GlobalConfigModule: Module
     {
+        private GlobalConfigModule() {}
+        public static readonly GlobalConfigModule Self = new GlobalConfigModule();
+        
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {

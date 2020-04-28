@@ -25,8 +25,8 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test]
         public async Task FetchTableName_Success()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection);
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
 
             var tableName = await postsRepository.FetchTableName();
             
@@ -37,8 +37,8 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test]
         public async Task FetchColumnNameFromAttribute_Success()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection);
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
 
             var pkCol = await postsRepository.FetchColumnNameFromAttribute<PrimaryKeyAttribute>();
             Assert.IsNotNull(pkCol);
@@ -64,8 +64,8 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test, Repeat(2)]
         public async Task DataFlow_InsertPostEntity_Test()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection);
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
             
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
@@ -97,8 +97,8 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test]
         public async Task DataFlow_InsertUpdatePost_Test()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection);
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
 
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
@@ -163,9 +163,9 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         [Test]
         public async Task DataFlow_FindPageAndMap_Test()
         {
-            var sqliteConnection = IoCManager.Resolver.ResolveInstance<SQLiteAsyncConnection>();
-            IPostsRepository postsRepository = new PostsRepository(sqliteConnection);
-
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+            
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
 
@@ -215,13 +215,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 
 
         private interface IPostsRepository : IDataRepository<PostEntity, int> { }
-        private class PostsRepository : DataRepository<PostEntity, int>, IPostsRepository
-        {
-            public PostsRepository(SQLiteAsyncConnection sqLiteAsyncConnection)
-            {
-                this.SqLiteConnection = sqLiteAsyncConnection;
-            }
-        }
+        private class PostsRepository : DataRepository<PostEntity, int>, IPostsRepository { }
         [Table("post")]
         private class PostEntity
         {

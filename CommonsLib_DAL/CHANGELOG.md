@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2020-04-26
+
+### Added Factory method on GrException
+### Added ConditionalOnProperty attribute for components.
+
 ## [1.1.0] - 2020-04-11
 
 ### Added Page utilities.

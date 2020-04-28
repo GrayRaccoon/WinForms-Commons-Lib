@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2020-04-26
+
+### Added ReadOnly Repository (for views).
+### Improved MigrationsNamespaces extensions collection.
+
 ## [1.0.1] - 2020-04-11
 
 ### Initial 1.0.1 Release

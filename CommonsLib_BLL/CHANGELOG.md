@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2020-04-26
+
+### Improved SettingsNamespaces extensions collection.
+
 ## [1.1.0] - 2020-04-11
 
 ### Added base configuration manager.

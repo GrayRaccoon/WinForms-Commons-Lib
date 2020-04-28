@@ -23,7 +23,7 @@ namespace CommonsLib_APP.Config
         /// <summary>
         /// Component Services namespaces list.
         /// </summary>
-        public readonly List<IAppInitializer> BootstrapInitializers = new List<IAppInitializer>
+        public readonly HashSet<IAppInitializer> BootstrapInitializers = new HashSet<IAppInitializer>
         {
             StandardBasePathBootstrapInitializer.Self,
             GlobalConfigurationBootstrapInitializer.Self,
@@ -68,7 +68,6 @@ namespace CommonsLib_APP.Config
 
             //Order Bootstrap Initializers.
             var bootstrapInitializers = BootstrapInitializers
-                .Distinct()
                 .OrderBy(init => init.Order)
                 .ThenBy(init => init.InitializerName)
                 .ToList();

@@ -8,6 +8,9 @@ namespace CommonsLib_IOC.Config.Modules
     /// </summary>
     public class LocalDbModule: Module
     {
+        private LocalDbModule() {}
+        public static readonly LocalDbModule Self = new LocalDbModule();
+        
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
