@@ -25,7 +25,6 @@ namespace CommonsLib_DAL.Config
         /// </summary>
         public static ILogger MainLogger { get; set; } = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo.Console(outputTemplate: LogOutputTemplate)
             .WriteTo.File(LogFileName,
                 rollingInterval: RollingInterval.Day,
                 outputTemplate: LogOutputTemplate,

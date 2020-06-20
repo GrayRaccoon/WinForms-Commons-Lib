@@ -22,7 +22,7 @@
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
     <Title>Gr Commons Lib DAL</Title>
-    <PackageVersion>1.1.1</PackageVersion>
+    <PackageVersion>1.1.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
