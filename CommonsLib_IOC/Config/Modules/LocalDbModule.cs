@@ -6,11 +6,13 @@ namespace CommonsLib_IOC.Config.Modules
     /// <summary>
     /// Local DB Access for IoC Container.
     /// </summary>
-    public class LocalDbModule: Module
+    public class LocalDbModule : Module
     {
-        private LocalDbModule() {}
+        private LocalDbModule()
+        { }
+
         public static readonly LocalDbModule Self = new LocalDbModule();
-        
+
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {

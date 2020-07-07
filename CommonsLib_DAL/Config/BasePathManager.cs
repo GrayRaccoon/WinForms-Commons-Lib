@@ -35,6 +35,5 @@ namespace CommonsLib_DAL.Config
             var isAbsolute = Path.IsPathRooted(fileName);
             return isAbsolute ? fileName : GetFile(fileName);
         }
-
     }
 }

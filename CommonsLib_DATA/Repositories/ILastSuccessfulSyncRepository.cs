@@ -8,7 +8,6 @@ namespace CommonsLib_DATA.Repositories
     /// </summary>
     public interface ILastSuccessfulSyncRepository : IDataRepository<LastSuccessfulSyncEntity, int>
     {
-
         /// <summary>
         /// Finds a LastSuccessfulSyncEntity for a provided table name and backend id.
         /// </summary>
@@ -16,6 +15,5 @@ namespace CommonsLib_DATA.Repositories
         /// <param name="backendId">Backend sync server id.</param>
         /// <returns>Found Last Successful Sync Entity.</returns>
         Task<LastSuccessfulSyncEntity> FindByTableIdAndBackendId(string tableId, string backendId = "default");
-
     }
 }

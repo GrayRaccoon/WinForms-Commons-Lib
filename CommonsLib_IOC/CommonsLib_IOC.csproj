@@ -5,10 +5,10 @@
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>GR.CommonsLib.IOC</PackageId>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
         <Title>Gr Commons Lib IoC</Title>
         <Authors>Heriberto Reyes Esparza</Authors>
-        <Description>Windows Forms Commons project for IoC configuration.</Description>
+        <Description>.Net Commons project for IoC configuration.</Description>
         <Copyright>Copyright 2020 CompanyLtd</Copyright>
         <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
         <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
@@ -18,17 +18,19 @@
         <PackageTags>dotNet WinForms GR</PackageTags>
         <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <FileVersion>1.0.3</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
-      <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
-      <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
+        <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
+        <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+        <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Autofac" Version="5.1.2" />
-      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Autofac" Version="5.2.0" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     </ItemGroup>
 
 </Project>

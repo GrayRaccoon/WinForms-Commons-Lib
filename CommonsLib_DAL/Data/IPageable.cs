@@ -14,11 +14,10 @@ namespace CommonsLib_DAL.Data
         /// Page Size.
         /// </summary>
         int Size { get; }
-        
+
         /// <summary>
         /// Page Offset.
         /// </summary>
         int Offset { get; }
-        
     }
 }

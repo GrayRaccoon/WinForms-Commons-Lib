@@ -16,7 +16,7 @@ namespace CommonsLib_DATA.Config
         /// Whether or not to delete existing database schema if validation fails.
         /// </summary>
         public static bool EraseSchemaIfValidationFails { get; set; } = false;
-        
+
         /// <summary>
         /// Global SQLiteAsyncConnection Instance.
         /// </summary>

@@ -25,22 +25,23 @@ namespace CommonsLib_DATA.Repositories.Impl
             get => _logger;
             set => _logger = value.ForContext(GetType());
         }
-        
+
         public SQLiteAsyncConnection SqLiteConnection { get; set; }
 
-        protected DataReadRepository() { }
-        
+        protected DataReadRepository()
+        { }
+
         /// <inheritdoc/>
         public async Task<string> FetchTableName()
         {
             var tableMapping = await SqLiteConnection.GetMappingAsync<TEntity>();
-            var tableName = tableMapping.TableName; 
+            var tableName = tableMapping.TableName;
             Logger.Debug($"Fetching Table Name: {tableName}");
             return tableName;
         }
 
         /// <inheritdoc/>
-        public async Task<string> FetchColumnNameFromAttribute<TAttribute>() 
+        public async Task<string> FetchColumnNameFromAttribute<TAttribute>()
             where TAttribute : Attribute
         {
             var tableMapping = await SqLiteConnection.GetMappingAsync<TEntity>();
@@ -81,7 +82,7 @@ namespace CommonsLib_DATA.Repositories.Impl
             catch (InvalidOperationException ex)
             {
                 var errorCode = DataErrorCodes.ItemNotFound;
-                throw new GrException(errorCode.Message, cause: ex, errorCode: errorCode);   
+                throw new GrException(errorCode.Message, cause: ex, errorCode: errorCode);
             }
         }
 
@@ -95,7 +96,6 @@ namespace CommonsLib_DATA.Repositories.Impl
             return await SqLiteConnection.QueryAsync<TEntity>(
                 $"SELECT * FROM {tableName} WHERE {idColName} in ({strIds})");
         }
-
 
 
         /// <inheritdoc/>
@@ -118,12 +118,14 @@ namespace CommonsLib_DATA.Repositories.Impl
             {
                 var transactionTask = transactionProcess();
                 transactionTask.Wait();
-                t.TrySetResult(
-                    transactionTask.Result
-                );
+                var result = transactionTask.Result;
+                Task.Run(() =>
+                {
+                    Task.Delay(1).Wait();
+                    t.TrySetResult(result);
+                });
             });
             return t.Task;
         }
-        
     }
 }

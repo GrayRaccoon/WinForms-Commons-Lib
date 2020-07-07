@@ -9,7 +9,6 @@ using CommonsLib_DAL.Extensions;
 using CommonsLib_DAL.Initializers;
 using CommonsLib_IOC.Config.Modules;
 using CommonsLib_IOC.Extensions;
-using Microsoft.Extensions.Configuration;
 using Module = Autofac.Module;
 
 namespace CommonsLib_IOC.Config.Initializers
@@ -17,9 +16,11 @@ namespace CommonsLib_IOC.Config.Initializers
     /// <summary>
     /// Initializer class for IoC
     /// </summary>
-    public class IoCBootstrapInitializer : IAppInitializer
+    public sealed class IoCBootstrapInitializer : IAppInitializer
     {
-        private IoCBootstrapInitializer() {}
+        private IoCBootstrapInitializer()
+        { }
+
         public static readonly IoCBootstrapInitializer Self = new IoCBootstrapInitializer();
 
         /// <summary>
@@ -44,21 +45,18 @@ namespace CommonsLib_IOC.Config.Initializers
 
         /// <inheritdoc/>
         public string InitializerName => "IoC Container Initializer";
-        
+
         /// <inheritdoc/>
         public int Order => 100;
-        
+
         /// <summary>
         /// Initialize IoC Container.
         /// </summary>
         public Task DoInitialize()
         {
-            return Task.Run(() =>
-            {
-                IoCManager.Resolver = new Resolver();
-            });
+            return Task.Run(() => IoCManager.Resolver = new Resolver());
         }
-        
+
         /// <summary>
         /// Create a Container from the app requirements.
         /// </summary>
@@ -75,21 +73,21 @@ namespace CommonsLib_IOC.Config.Initializers
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t =>
                     t.HasAttribute<ComponentAttribute>()
-                    && !t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && !t.GetAttributeIfExists<ComponentAttribute>()!.Primary
                     && !t.HasAttribute<OptionalOnPropertyAttribute>()
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
                 .SingleInstance();
-            
+
             // Register Components Not Primary, Optional
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t =>
                     t.HasAttribute<ComponentAttribute>()
-                    && !t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && !t.GetAttributeIfExists<ComponentAttribute>()!.Primary
                     && t.HasAttribute<OptionalOnPropertyAttribute>()
                     && t.GetAttributeIfExists<OptionalOnPropertyAttribute>()
-                        .Validate(GlobalConfigManager.ConfigRoot)
+                        !.Validate(GlobalConfigManager.ConfigRoot)
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
@@ -99,7 +97,7 @@ namespace CommonsLib_IOC.Config.Initializers
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t =>
                     t.HasAttribute<ComponentAttribute>()
-                    && t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && t.GetAttributeIfExists<ComponentAttribute>()!.Primary
                     && !t.HasAttribute<OptionalOnPropertyAttribute>()
                 ).AsImplementedInterfaces()
                 .AsSelf()
@@ -110,10 +108,10 @@ namespace CommonsLib_IOC.Config.Initializers
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t =>
                     t.HasAttribute<ComponentAttribute>()
-                    && t.GetAttributeIfExists<ComponentAttribute>().Primary
+                    && t.GetAttributeIfExists<ComponentAttribute>()!.Primary
                     && t.HasAttribute<OptionalOnPropertyAttribute>()
                     && t.GetAttributeIfExists<OptionalOnPropertyAttribute>()
-                        .Validate(GlobalConfigManager.ConfigRoot)
+                        !.Validate(GlobalConfigManager.ConfigRoot)
                 ).AsImplementedInterfaces()
                 .AsSelf()
                 .PropertiesAutowired()
@@ -140,23 +138,15 @@ namespace CommonsLib_IOC.Config.Initializers
             /// <inheritdoc/>
             public T ResolveInstance<T>()
             {
-                var container = _container;
-                T instance;
-                using (var scope = container.BeginLifetimeScope())
-                {
-                    instance = scope.Resolve<T>();
-                }
-                return instance;
+                using var scope = _container.BeginLifetimeScope();
+                return scope.Resolve<T>();
             }
 
             /// <inheritdoc/>
             public TService InjectProperties<TService>(TService service)
             {
-                var container = _container;
-                using (var scope = container.BeginLifetimeScope())
-                {
-                    service = scope.InjectProperties(service);
-                }
+                using var scope = _container.BeginLifetimeScope();
+                service = scope.InjectProperties(service);
                 return service;
             }
 
@@ -166,6 +156,5 @@ namespace CommonsLib_IOC.Config.Initializers
                 _container?.Dispose();
             }
         }
-
     }
 }

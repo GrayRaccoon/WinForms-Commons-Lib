@@ -9,7 +9,6 @@ namespace CommonsLib_FLL.Extensions
     /// </summary>
     public static class PictureBoxExtensions
     {
-
         /// <summary>
         /// Loads an image into a PictureBox without holding it in filesystem.
         /// </summary>

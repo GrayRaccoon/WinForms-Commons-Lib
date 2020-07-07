@@ -9,7 +9,6 @@ namespace CommonsLib_FLL.Controls
     /// </summary>
     public abstract class BaseProgressBar : UserControl
     {
-
         // Private attributes
         private Bitmap? _bmp;
         private PictureBox? _pictureBox;
@@ -49,7 +48,11 @@ namespace CommonsLib_FLL.Controls
         /// BackColor is an alias for BgColor.
         /// </summary>
         [RefreshProperties(RefreshProperties.All)]
-        public override Color BackColor { get => base.BackColor; set => base.BackColor = _bgColor = value; }
+        public override Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = _bgColor = value;
+        }
 
         /// <summary>
         /// Defines the Progress bar Active Sections Color.
@@ -144,11 +147,11 @@ namespace CommonsLib_FLL.Controls
             PbGraphics.FillRectangle(
                 new SolidBrush(this.ActiveColor),
                 new Rectangle(
-                    (int)(from * this.PbUnit),
+                    (int) (from * this.PbUnit),
                     0,
-                    (int)(width * this.PbUnit),
+                    (int) (width * this.PbUnit),
                     this.Height)
-                );
+            );
         }
 
 

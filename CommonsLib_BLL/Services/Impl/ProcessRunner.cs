@@ -10,7 +10,7 @@ namespace CommonsLib_BLL.Services.Impl
 {
     /// <inheritdoc/>
     [Component]
-    public class ProcessRunner: IProcessRunner
+    public class ProcessRunner : IProcessRunner
     {
         private ILogger _logger = LoggerManager.MainLogger;
 
@@ -22,9 +22,9 @@ namespace CommonsLib_BLL.Services.Impl
 
 
         /// <inheritdoc/>
-        public Task<int> RunNewProcess(IEnumerable<string> commands, 
-            string workingDirectory = ".", 
-            string runner = "bash", 
+        public Task<int> RunNewProcess(IEnumerable<string> commands,
+            string workingDirectory = ".",
+            string runner = "bash",
             Action<string>? onDataLine = null,
             Action<string>? onErrorLine = null)
         {
@@ -48,30 +48,29 @@ namespace CommonsLib_BLL.Services.Impl
                     Logger.Information(data);
                     onDataLine?.Invoke(data);
                 };
-                
+
                 process.ErrorDataReceived += (sender, args) =>
                 {
                     var data = args.Data;
                     Logger.Error(data);
                     onErrorLine?.Invoke(data);
                 };
-                
+
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
-                
+
                 using (var sw = process.StandardInput)
                 {
                     if (sw.BaseStream.CanWrite)
                     {
                         foreach (var cmd in commands)
-                            sw.WriteLine (cmd);
+                            sw.WriteLine(cmd);
                     }
                 }
-                
+
                 process.WaitForExit();
                 return process.ExitCode;
             });
         }
     }
-
 }

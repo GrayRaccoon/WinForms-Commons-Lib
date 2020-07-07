@@ -8,11 +8,11 @@ namespace CommonsLib_DATA.Repositories.Impl
 {
     /// <inheritdoc cref="ILastSuccessfulSyncRepository"/>
     [Component]
-    public class LastSuccessfulSyncRepository: DataRepository<LastSuccessfulSyncEntity, int>, 
+    public class LastSuccessfulSyncRepository : DataRepository<LastSuccessfulSyncEntity, int>,
         ILastSuccessfulSyncRepository
     {
-
-        public async Task<LastSuccessfulSyncEntity> FindByTableIdAndBackendId(string tableId, string backendId = "default")
+        public async Task<LastSuccessfulSyncEntity> FindByTableIdAndBackendId(string tableId,
+            string backendId = "default")
         {
             var item = await SqLiteConnection.FindWithQueryAsync<LastSuccessfulSyncEntity>(
                 "SELECT lss.* FROM last_successful_sync lss WHERE lss.table_id = ? AND lss.backend_id = ?",
@@ -21,7 +21,6 @@ namespace CommonsLib_DATA.Repositories.Impl
             if (item != default) return item;
             var errorCode = DataErrorCodes.ItemNotFound;
             throw new GrException(errorCode.Message, errorCode: errorCode);
-
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using CommonsLib_DAL.Config;
@@ -12,9 +11,11 @@ namespace CommonsLib_DATA.Config.Initializers
     /// <summary>
     /// Initializer class for Local Storage
     /// </summary>
-    public class SqLiteBootstrapInitializer: IAppInitializer
+    public sealed class SqLiteBootstrapInitializer : IAppInitializer
     {
-        private SqLiteBootstrapInitializer() {}
+        private SqLiteBootstrapInitializer()
+        { }
+
         public static readonly SqLiteBootstrapInitializer Self = new SqLiteBootstrapInitializer();
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace CommonsLib_DATA.Config.Initializers
 
         /// <inheritdoc/>
         public string InitializerName => "Local Storage SQLite Initializer";
-        
+
         /// <inheritdoc/>
         public int Order => 40;
 
@@ -54,12 +55,13 @@ namespace CommonsLib_DATA.Config.Initializers
                 var sqliteConnection = new SqliteConnection(msConnString);
 
                 // Apply Migrations.
-                var evolve = new Evolve.Evolve(sqliteConnection, 
+                var evolve = new Evolve.Evolve(sqliteConnection,
                     LoggerManager.MainLogger.ForContext<SqLiteBootstrapInitializer>().Information)
                 {
                     EmbeddedResourceAssemblies = embeddedMigrationAssemblies.ToArray(),
                     EmbeddedResourceFilters = embeddedMigrationsFilters.ToArray(),
-                    IsEraseDisabled = LocalDbManager.EraseSchemaIfValidationFails
+                    MustEraseOnValidationError = LocalDbManager.EraseSchemaIfValidationFails,
+                    IsEraseDisabled = !LocalDbManager.EraseSchemaIfValidationFails
                 };
                 evolve.Migrate();
 
@@ -67,7 +69,5 @@ namespace CommonsLib_DATA.Config.Initializers
                 LocalDbManager.DbConnection = new SQLiteAsyncConnection(dbFilePath);
             });
         }
-
     }
-
 }

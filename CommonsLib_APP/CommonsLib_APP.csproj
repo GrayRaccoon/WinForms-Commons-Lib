@@ -6,10 +6,10 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>GR.CommonsLib.APP</PackageId>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
         <Title>Gr Commons Lib APP</Title>
         <Authors>Heriberto Reyes Esparza</Authors>
-        <Description>Windows Forms Commons project for App base configuration.</Description>
+        <Description>.Net Commons project for App base configuration.</Description>
         <Copyright>Copyright 2020 CompanyLtd</Copyright>
         <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
         <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
@@ -18,13 +18,15 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>dotNet WinForms GR</PackageTags>
         <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <FileVersion>1.0.3</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
-      <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
-      <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
-      <ProjectReference Include="..\CommonsLib_IOC\CommonsLib_IOC.csproj" />
+        <ProjectReference Include="..\CommonsLib_BLL\CommonsLib_BLL.csproj" />
+        <ProjectReference Include="..\CommonsLib_DAL\CommonsLib_DAL.csproj" />
+        <ProjectReference Include="..\CommonsLib_DATA\CommonsLib_DATA.csproj" />
+        <ProjectReference Include="..\CommonsLib_IOC\CommonsLib_IOC.csproj" />
     </ItemGroup>
 
 </Project>

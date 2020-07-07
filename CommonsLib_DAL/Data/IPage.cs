@@ -31,6 +31,5 @@ namespace CommonsLib_DAL.Data
         /// <typeparam name="TMapped">New Page expected type.</typeparam>
         /// <returns>New page with new mapped type.</returns>
         IPage<TMapped> Map<TMapped>(Func<T, TMapped> mapper);
-
     }
 }

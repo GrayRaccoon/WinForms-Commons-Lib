@@ -6,5 +6,6 @@ namespace CommonsLib_DATA.Attributes
     /// Attribute to identify which Field can be used as Created At datetime.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class CreatedAtColumnAttribute : Attribute { }
+    public class CreatedAtColumnAttribute : Attribute
+    { }
 }

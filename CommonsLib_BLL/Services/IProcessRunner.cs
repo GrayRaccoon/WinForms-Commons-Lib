@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace CommonsLib_BLL.Services
 {
-
     /// <summary>
     /// Simple Process runner
     /// </summary>
@@ -20,11 +19,10 @@ namespace CommonsLib_BLL.Services
         /// <param name="onErrorLine">Callback to receive new error lines.</param>
         /// <returns>Process status code.</returns>
         Task<int> RunNewProcess(
-            IEnumerable<string> commands, 
+            IEnumerable<string> commands,
             string workingDirectory = ".",
             string runner = "bash",
             Action<string>? onDataLine = null,
             Action<string>? onErrorLine = null);
     }
-
 }

@@ -7,7 +7,6 @@ namespace CommonsLib_DAL.Config
     /// </summary>
     public static class LoggerManager
     {
-
         /// <summary>
         /// Log file Name.
         /// </summary>
@@ -16,7 +15,7 @@ namespace CommonsLib_DAL.Config
         /// <summary>
         /// Logger Output Template.
         /// </summary>
-        public static string LogOutputTemplate { get; set; } = 
+        public static string LogOutputTemplate { get; set; } =
             "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}";
 
         /// <summary>
@@ -30,6 +29,5 @@ namespace CommonsLib_DAL.Config
                 outputTemplate: LogOutputTemplate,
                 shared: true)
             .CreateLogger();
-        
     }
 }

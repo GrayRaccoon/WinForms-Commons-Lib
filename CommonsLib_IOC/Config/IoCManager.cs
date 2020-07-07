@@ -10,6 +10,5 @@ namespace CommonsLib_IOC.Config
         /// Global IResolver Instance.
         /// </summary>
         public static IResolver Resolver { get; set; }
-
     }
 }

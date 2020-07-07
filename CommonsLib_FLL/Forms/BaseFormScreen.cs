@@ -43,6 +43,7 @@ namespace CommonsLib_FLL.Forms
                 form.StartPosition = FormStartPosition.Manual;
                 form.Location = this.Location;
             }
+
             form.Show();
             this.Hide();
             form.Activate();
@@ -118,7 +119,7 @@ namespace CommonsLib_FLL.Forms
         /// <param name="uiTask">Task to run on UI Thread.</param>
         public void RunOnUiThread(Action uiTask)
         {
-            Invoke((MethodInvoker)delegate { uiTask(); });
+            Invoke((MethodInvoker) delegate { uiTask(); });
         }
 
         /// <summary>
@@ -138,13 +139,11 @@ namespace CommonsLib_FLL.Forms
             });
             return t.Task;
         }
-        
     }
-    
+
     /// <summary>
     /// Delegate to use while calling RunOnUiThread.
     /// </summary>
     /// <typeparam name="T">Expected return type.</typeparam>
     public delegate T UiTaskActionWithReturn<out T>();
-
 }

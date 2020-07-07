@@ -12,10 +12,10 @@ namespace CommonsLib_DATA.Repositories.Impl
         : DataRepository<TEntity, TId>, ISyncableDataRepository<TEntity, TId>
         where TEntity : class, new()
     {
-
         public ILastSuccessfulSyncRepository LastSuccessfulSyncRepository { get; set; }
 
-        protected SyncableDataRepository() : base() { }
+        protected SyncableDataRepository() : base()
+        { }
 
         /// <inheritdoc/>
         public async Task<DateTimeOffset> FetchLastSuccessfulSync(string backendId = "default")
@@ -23,7 +23,7 @@ namespace CommonsLib_DATA.Repositories.Impl
             var tableName = await FetchTableName();
             var lastSuccessfulSync = await LastSuccessfulSyncRepository
                 .FindByTableIdAndBackendId(tableName, backendId);
-            
+
             return lastSuccessfulSync.SyncTimestamp;
         }
 
@@ -41,6 +41,5 @@ namespace CommonsLib_DATA.Repositories.Impl
                 $"OR ( {updatedAtColumn} >= ? AND {idColumn} not in ({strNewerIds}) )",
                 lastSuccessfulSync, lastSuccessfulSync);
         }
-        
     }
 }

@@ -1,7 +1,7 @@
 namespace CommonsLib_DAL.Data.Impl
 {
     /// <inheritdoc/>
-    public class Pageable: IPageable
+    public class Pageable : IPageable
     {
         /// <inheritdoc/>
         public int Page { get; private set; }
@@ -26,6 +26,5 @@ namespace CommonsLib_DAL.Data.Impl
                 Size = size
             };
         }
-
     }
 }

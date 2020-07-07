@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using CommonsLib_DAL.Config;
@@ -13,19 +12,22 @@ namespace CommonsLib_BLL.Config.Initializers
     /// <summary>
     /// Initializer class for Global Application Configuration.
     /// </summary>
-    public class GlobalConfigurationBootstrapInitializer: IAppInitializer
+    public sealed class GlobalConfigurationBootstrapInitializer : IAppInitializer
     {
-        private GlobalConfigurationBootstrapInitializer() {}
-        public static readonly GlobalConfigurationBootstrapInitializer Self = new GlobalConfigurationBootstrapInitializer();
-        
+        private GlobalConfigurationBootstrapInitializer()
+        { }
+
+        public static readonly GlobalConfigurationBootstrapInitializer Self =
+            new GlobalConfigurationBootstrapInitializer();
+
         /// <summary>
         /// Global Settings namespaces list.
         /// </summary>
         public readonly HashSet<string> SettingsNamespaces = new HashSet<string>();
-        
+
         /// <inheritdoc/>
         public string InitializerName => "Global Configuration Initializer";
-        
+
         /// <inheritdoc/>
         public int Order => 0;
 
@@ -36,11 +38,12 @@ namespace CommonsLib_BLL.Config.Initializers
         {
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(BasePathManager.BasePath);
-            
+
             foreach (var settingsNamespace in SettingsNamespaces)
             {
                 var settingsAssembly = Assembly.Load(settingsNamespace);
-                var appSettingsStream = settingsAssembly.GetManifestResourceStream($"{settingsNamespace}.appsettings.json");
+                var appSettingsStream =
+                    settingsAssembly.GetManifestResourceStream($"{settingsNamespace}.appsettings.json");
                 if (appSettingsStream == null) continue;
                 var tmpSettingsFilePath = BasePathManager.GetFile($"tmp.{settingsNamespace}.appsettings.json");
                 if (File.Exists(tmpSettingsFilePath))
@@ -53,25 +56,23 @@ namespace CommonsLib_BLL.Config.Initializers
             if (GlobalConfigManager.ExternalAppSettingsEnabled)
             {
                 configBuilder
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);   
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             }
 
             if (GlobalConfigManager.CloudConfigSettingsEnabled)
             {
                 configBuilder
-                    .AddConfigServer();   
+                    .AddConfigServer();
             }
 
             if (GlobalConfigManager.PostAppSettingsEnabled)
             {
                 // appsettings-post has the most higher priority, over assembly, local and cloud configs.
                 configBuilder
-                    .AddJsonFile("appsettings-post.json", optional: true, reloadOnChange: true);   
+                    .AddJsonFile("appsettings-post.json", optional: true, reloadOnChange: true);
             }
 
             GlobalConfigManager.ConfigRoot = configBuilder.Build();
         }
-        
     }
-
 }

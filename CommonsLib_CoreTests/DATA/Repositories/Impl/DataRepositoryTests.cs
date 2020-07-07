@@ -12,7 +12,7 @@ using SQLite;
 namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 {
     [TestFixture]
-    public class DataRepositoryTests: BaseTestClass
+    public class DataRepositoryTests : BaseTestClass
     {
         private const string Post1Title1 = "My Test";
         private const string Post1Content1 = "Nice Post content For my test";
@@ -20,8 +20,8 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 
         private const string Post2Title1 = "Our Testing";
         private const string Post2Content1 = "Amazing Post content For The Testing.";
-        
-        
+
+
         [Test]
         public async Task FetchTableName_Success()
         {
@@ -29,7 +29,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             IoCManager.Resolver.InjectProperties(postsRepository);
 
             var tableName = await postsRepository.FetchTableName();
-            
+
             Assert.IsNotNull(tableName);
             Assert.AreEqual("post", tableName);
         }
@@ -44,12 +44,12 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             Assert.IsNotNull(pkCol);
             Assert.IsNotEmpty(pkCol);
             Assert.AreEqual("post_id", pkCol);
-            
+
             var createdAtCol = await postsRepository.FetchColumnNameFromAttribute<CreatedAtColumnAttribute>();
             Assert.IsNotNull(createdAtCol);
             Assert.IsNotEmpty(createdAtCol);
             Assert.AreEqual("created_at", createdAtCol);
-            
+
             var updatedAtCol = await postsRepository.FetchColumnNameFromAttribute<UpdatedAtColumnAttribute>();
             Assert.IsNotNull(updatedAtCol);
             Assert.IsNotEmpty(updatedAtCol);
@@ -59,23 +59,23 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             Assert.IsNotNull(uniqueCol);
             Assert.IsEmpty(uniqueCol);
         }
-        
-        
+
+
         [Test, Repeat(2)]
         public async Task DataFlow_InsertPostEntity_Test()
         {
             IPostsRepository postsRepository = new PostsRepository();
             IoCManager.Resolver.InjectProperties(postsRepository);
-            
+
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
-            
+
             var samplePost1 = new PostEntity
             {
                 Title = Post1Title1, Content = Post1Content1
             };
             Assert.AreEqual(0, samplePost1.PostId);
-            
+
             samplePost1 = await postsRepository.Save(samplePost1);
             Assert.AreNotEqual(0, samplePost1.PostId);
 
@@ -102,7 +102,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
-            
+
             var samplePost1 = new PostEntity
             {
                 Title = Post1Title1, Content = Post1Content1
@@ -121,22 +121,22 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 
             samplePost1 = savedPosts[0];
             samplePost2 = savedPosts[1];
-            
+
             Assert.AreNotEqual(0, samplePost1.PostId);
             Assert.AreEqual(1, samplePost1.PostId);
             Assert.AreEqual(Post1Title1, samplePost1.Title);
             Assert.AreEqual(Post1Content1, samplePost1.Content);
-            
+
             Assert.AreNotEqual(0, samplePost2.PostId);
             Assert.AreEqual(2, samplePost2.PostId);
             Assert.AreEqual(Post2Title1, samplePost2.Title);
             Assert.AreEqual(Post2Content1, samplePost2.Content);
 
-            
+
             samplePost1.Content = Post1Content2;
             samplePost1 = await postsRepository.Save(samplePost1);
             Assert.AreEqual(samplePost1.Content, Post1Content2);
-            
+
             findAllResult = await postsRepository.FindAll();
             Assert.IsNotEmpty(findAllResult);
             Assert.AreEqual(2, findAllResult.Count);
@@ -156,7 +156,6 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             var allPostsFound = await postsRepository.FindAllById(new[] {1, 2, 1000});
             Assert.IsNotNull(allPostsFound);
             Assert.AreEqual(2, allPostsFound.Count);
-
         }
 
 
@@ -165,7 +164,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
         {
             IPostsRepository postsRepository = new PostsRepository();
             IoCManager.Resolver.InjectProperties(postsRepository);
-            
+
             var findAllResult = await postsRepository.FindAll();
             Assert.IsEmpty(findAllResult);
 
@@ -173,59 +172,285 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             var savedPosts = await postsRepository.SaveAll(
                 new[]
                 {
-                    new PostEntity { Title = $"{postCount}", Content = $"{postCount++}"},
-                    new PostEntity { Title = $"{postCount}", Content = $"{postCount++}"},
-                    new PostEntity { Title = $"{postCount}", Content = $"{postCount++}"},
-                    new PostEntity { Title = $"{postCount}", Content = $"{postCount++}"},
-                    new PostEntity { Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
                 });
-            
+
             Assert.IsNotNull(savedPosts);
             Assert.IsNotEmpty(savedPosts);
             Assert.AreEqual(postCount, savedPosts.Count);
 
             var foundPage = await postsRepository.FindAll(Pageable.Of(1, 2));
-            
+
             Assert.IsNotNull(foundPage);
             Assert.IsNotNull(foundPage.PageInfo);
             Assert.AreEqual(postCount, foundPage.Total);
-            
+
             Assert.IsNotNull(foundPage.Content);
             Assert.AreEqual(2, foundPage.Content.Count);
-            
+
             Assert.IsNotNull(foundPage.Content[0]);
             Assert.AreEqual("2", foundPage.Content[0].Title);
-            
+
             Assert.IsNotNull(foundPage.Content[1]);
             Assert.AreEqual("3", foundPage.Content[1].Title);
 
-            
+
             var mappedPage = foundPage.Map(entity => entity.Title);
-            
+
             Assert.IsNotNull(mappedPage);
             Assert.IsNotNull(mappedPage.PageInfo);
             Assert.AreEqual(postCount, mappedPage.Total);
-            
+
             Assert.IsNotNull(mappedPage.Content);
             Assert.AreEqual(2, mappedPage.Content.Count);
             Assert.AreEqual("2", mappedPage.Content[0]);
             Assert.AreEqual("3", mappedPage.Content[1]);
+        }
 
+        [Test]
+        public async Task DataFlow_SoftDeleteById_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            var secondPost = savedPosts[1];
+
+            await postsRepository.DeleteById(secondPost.PostId);
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsNotEmpty(foundPosts);
+            Assert.AreEqual(postCount, foundPosts.Count);
+
+            Assert.IsFalse(foundPosts[0].IsDeleted);
+            Assert.IsTrue(foundPosts[1].IsDeleted);
+            Assert.IsFalse(foundPosts[2].IsDeleted);
+        }
+        
+        [Test]
+        public async Task DataFlow_SoftDeleteByIds_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            var secondPost = savedPosts[1];
+            var thirdPost = savedPosts[2];
+
+            await postsRepository.DeleteAllById(new []{ secondPost.PostId, thirdPost.PostId });
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsNotEmpty(foundPosts);
+            Assert.AreEqual(postCount, foundPosts.Count);
+
+            Assert.IsFalse(foundPosts[0].IsDeleted);
+            Assert.IsTrue(foundPosts[1].IsDeleted);
+            Assert.IsTrue(foundPosts[2].IsDeleted);
+        }
+        
+        [Test]
+        public async Task DataFlow_SoftDeleteAll_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            await postsRepository.DeleteAll();
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsNotEmpty(foundPosts);
+            Assert.AreEqual(postCount, foundPosts.Count);
+
+            foreach (var postEntity in foundPosts)
+                Assert.IsTrue(postEntity.IsDeleted);
+        }
+
+        [Test]
+        public async Task DataFlow_HardDeleteById_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            var secondPost = savedPosts[1];
+
+            await postsRepository.DeleteById(secondPost.PostId, softDelete: false);
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsNotEmpty(foundPosts);
+            Assert.AreEqual(postCount - 1, foundPosts.Count);
+
+            foreach (var postEntity in foundPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+        }
+
+        [Test]
+        public async Task DataFlow_HardDeleteByIds_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            var firstPost = savedPosts[0];
+            var secondPost = savedPosts[1];
+            var thirdPost = savedPosts[2];
+
+            await postsRepository.DeleteAllById(new []{ secondPost.PostId, thirdPost.PostId }, softDelete: false);
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsNotEmpty(foundPosts);
+            Assert.AreEqual(postCount - 2, foundPosts.Count);
+
+            Assert.AreEqual(firstPost.PostId, foundPosts[0].PostId);
+        }
+
+        [Test]
+        public async Task DataFlow_HardDeleteAll_Test()
+        {
+            IPostsRepository postsRepository = new PostsRepository();
+            IoCManager.Resolver.InjectProperties(postsRepository);
+
+            var findAllResult = await postsRepository.FindAll();
+            Assert.IsEmpty(findAllResult);
+
+            var postCount = 0;
+            var savedPosts = await postsRepository.SaveAll(
+                new[]
+                {
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                    new PostEntity {Title = $"{postCount}", Content = $"{postCount++}"},
+                });
+
+            Assert.IsNotNull(savedPosts);
+            Assert.IsNotEmpty(savedPosts);
+            Assert.AreEqual(postCount, savedPosts.Count);
+            
+            foreach (var postEntity in savedPosts)
+                Assert.IsFalse(postEntity.IsDeleted);
+
+            await postsRepository.DeleteAll(softDelete: false);
+
+            var foundPosts = await postsRepository.FindAll();
+            Assert.IsNotNull(foundPosts);
+            Assert.IsEmpty(foundPosts);
         }
 
 
-        private interface IPostsRepository : IDataRepository<PostEntity, int> { }
-        private class PostsRepository : DataRepository<PostEntity, int>, IPostsRepository { }
+
+        private interface IPostsRepository : IDataRepository<PostEntity, int>
+        { }
+
+        private class PostsRepository : DataRepository<PostEntity, int>, IPostsRepository
+        { }
+
         [Table("post")]
         private class PostEntity
         {
             [Column("post_id"), PrimaryKey, AutoIncrement]
             public int PostId { get; set; }
 
-            [Column("title"), NotNull]
-            public string Title { get; set; }
-            [Column("content"), NotNull]
-            public string Content { get; set; }
+            [Column("title"), NotNull] public string Title { get; set; }
+            [Column("content"), NotNull] public string Content { get; set; }
 
             [IsDeletedFlagColumn(IsDeletedValue = true)]
             [Column("is_deleted"), NotNull]
@@ -240,5 +465,4 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             public DateTimeOffset UpdatedAt { get; set; }
         }
     }
-
 }

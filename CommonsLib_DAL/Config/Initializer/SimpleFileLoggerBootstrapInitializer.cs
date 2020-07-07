@@ -7,15 +7,17 @@ namespace CommonsLib_DAL.Config.Initializer
     /// <summary>
     /// Initializer class for Logger
     /// </summary>
-    public class SimpleFileLoggerBootstrapInitializer: IAppInitializer
+    public sealed class SimpleFileLoggerBootstrapInitializer : IAppInitializer
     {
-        private SimpleFileLoggerBootstrapInitializer() {}
+        private SimpleFileLoggerBootstrapInitializer()
+        { }
+
         public static readonly SimpleFileLoggerBootstrapInitializer Self = new SimpleFileLoggerBootstrapInitializer();
 
 
         /// <inheritdoc/>
         public string InitializerName => "Simple File Logger Initializer";
-        
+
         /// <inheritdoc/>
         public int Order => 5;
 
@@ -36,6 +38,5 @@ namespace CommonsLib_DAL.Config.Initializer
                     .CreateLogger();
             });
         }
-
     }
 }

@@ -26,6 +26,7 @@ namespace CommonsLib_BLL.Config
         /// <summary>
         /// Global configuration root instance.
         /// </summary>
-        public static IConfigurationRoot ConfigRoot { get; set; } = new ConfigurationRoot(new List<IConfigurationProvider>());
+        public static IConfigurationRoot ConfigRoot { get; set; } =
+            new ConfigurationRoot(new List<IConfigurationProvider>());
     }
 }
