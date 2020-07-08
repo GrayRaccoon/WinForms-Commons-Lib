@@ -9,7 +9,7 @@ namespace CommonsLib_FLL.Forms
     /// <summary>
     /// Class to handle Application windows management.
     /// </summary>
-    public class ActivityManager: ApplicationContext
+    public class ActivityManager : ApplicationContext
     {
         /// <summary>
         /// Attribute to track the last available Active Form location.
@@ -30,7 +30,8 @@ namespace CommonsLib_FLL.Forms
         /// <summary>
         /// Private ActivityManager Constructor
         /// </summary>
-        private ActivityManager() :base() { }
+        private ActivityManager() : base()
+        { }
 
         /// <summary>
         /// Factory method where to create ActivityManager instance,
@@ -44,6 +45,7 @@ namespace CommonsLib_FLL.Forms
             {
                 throw new InvalidOperationException("Already Active Activity Manager");
             }
+
             Instance = new ActivityManager();
             entryPoint.Show();
             return Instance;
@@ -80,6 +82,5 @@ namespace CommonsLib_FLL.Forms
             parentForm.Location = this.LastFormLocation;
             parentForm.Show();
         }
-
     }
 }

@@ -27,16 +27,18 @@ namespace CommonsLib_CoreTests
 
             AppBootstrap.Self.BootstrapInitializers.Add(PreConfigInitializer.Self);
             AppBootstrap.Self.BootstrapInitializers.Add(PostConfigInitializer.Self);
-            
+
             static void StatusLogger(string status)
-            { Console.WriteLine($"BL Status: {status}"); }
+            {
+                Console.WriteLine($"BL Status: {status}");
+            }
 
             AppBootstrap.Self.OnInitializerStatusChanged -= StatusLogger;
             AppBootstrap.Self.OnInitializerStatusChanged += StatusLogger;
 
             // Initialize App
             var initializerTask = AppBootstrap.Self.Initialize();
-            
+
             initializerTask.Wait();
         }
 
@@ -68,17 +70,19 @@ namespace CommonsLib_CoreTests
         }
     }
 
-    internal class PreConfigInitializer : IAppInitializer
+    internal sealed class PreConfigInitializer : IAppInitializer
     {
-        private PreConfigInitializer() {}
+        private PreConfigInitializer()
+        { }
+
         public static readonly PreConfigInitializer Self = new PreConfigInitializer();
-        
+
         /// <inheritdoc/>
         public int Order => -6;
 
         /// <inheritdoc/>
         public string InitializerName => "Unit Tests Pre-Config Initializer.";
-        
+
         /// <summary>
         /// Add unit test initializer stuff.
         /// </summary>
@@ -89,29 +93,31 @@ namespace CommonsLib_CoreTests
                 GlobalConfigManager.ExternalAppSettingsEnabled = true;
                 GlobalConfigManager.PostAppSettingsEnabled = true;
 
-                GlobalConfigurationBootstrapInitializer.Self.SettingsNamespaces.UnionWith(new []
+                GlobalConfigurationBootstrapInitializer.Self.SettingsNamespaces.UnionWith(new[]
                 {
                     nameof(CommonsLib_CoreTests)
                 });
-                SqLiteBootstrapInitializer.Self.MigrationsNamespaces.UnionWith(new []
+                SqLiteBootstrapInitializer.Self.MigrationsNamespaces.UnionWith(new[]
                 {
                     nameof(CommonsLib_CoreTests)
                 });
             });
         }
     }
-    
+
     internal class PostConfigInitializer : IAppInitializer
     {
-        private PostConfigInitializer() {}
+        private PostConfigInitializer()
+        { }
+
         public static readonly PostConfigInitializer Self = new PostConfigInitializer();
-        
+
         /// <inheritdoc/>
         public int Order => 2;
 
         /// <inheritdoc/>
         public string InitializerName => "Unit Tests Post-Config Initializer.";
-        
+
         /// <summary>
         /// Add unit test initializer stuff.
         /// </summary>

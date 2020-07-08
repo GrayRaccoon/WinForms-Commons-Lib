@@ -11,7 +11,6 @@ namespace CommonsLib_DATA.Repositories
         : IDataRepository<TEntity, TId>
         where TEntity : class, new()
     {
-
         /// <summary>
         /// Gets the last Successful Sync Timestamp for TEntity and specified Backend.
         /// </summary>
@@ -27,6 +26,5 @@ namespace CommonsLib_DATA.Repositories
         /// <returns>TEntity instances pending to sync.</returns>
         Task<List<TEntity>> FindAllPendingToSync(DateTimeOffset lastSuccessfulSync,
             params TId[] newerIds);
-
     }
 }

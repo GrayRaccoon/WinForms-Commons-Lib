@@ -9,10 +9,9 @@ namespace CommonsLib_DATA.Repositories
     /// <summary>
     /// Generic Read Only Data Repository
     /// </summary>
-    public interface IDataReadRepository<TEntity, in TId> 
+    public interface IDataReadRepository<TEntity, in TId>
         where TEntity : class, new()
     {
-
         /// <summary>
         /// Gets the TEntity table name.
         /// </summary>
@@ -24,9 +23,9 @@ namespace CommonsLib_DATA.Repositories
         /// </summary>
         /// <typeparam name="TAttribute">Attribute to use to find column name.</typeparam>
         /// <returns>Found column name</returns>
-        Task<string> FetchColumnNameFromAttribute<TAttribute>() 
+        Task<string> FetchColumnNameFromAttribute<TAttribute>()
             where TAttribute : Attribute;
-        
+
         /// <summary>
         /// Finds All Available TEntities.
         /// </summary>
@@ -40,10 +39,10 @@ namespace CommonsLib_DATA.Repositories
         /// <returns>Page of available TEntity in Storage.</returns>
         Task<IPage<TEntity>> FindAll(IPageable pageable);
 
-        
         /// <summary>
         /// Finds a TEntity by TId.
         /// </summary>
+        /// <param name="id">If to find</param>
         /// <returns>Found TEntity in Storage.</returns>
         /// <exception cref="GrException">If no entity is found for given id.</exception>
         Task<TEntity> FindById(TId id);
@@ -51,11 +50,10 @@ namespace CommonsLib_DATA.Repositories
         /// <summary>
         /// Finds a List of Entities using given ids.
         /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
+        /// <param name="ids">Ids to find</param>
+        /// <returns>Found TEntity's in Storage.</returns>
         Task<List<TEntity>> FindAllById(IEnumerable<TId> ids);
-        
-        
+
 
         /// <summary>
         /// Performs certain Action inside a DB transaction.
@@ -79,6 +77,5 @@ namespace CommonsLib_DATA.Repositories
         /// <typeparam name="T">Task return type.</typeparam>
         /// <returns>Provided Task result.</returns>
         Task<T> RunTaskOnTransaction<T>(Func<Task<T>> transactionProcess);
-        
     }
 }

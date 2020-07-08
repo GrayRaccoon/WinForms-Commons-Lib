@@ -8,7 +8,6 @@ namespace CommonsLib_DAL.Extensions
     /// </summary>
     public static class ObjectAttributesExtensions
     {
-
         /// <summary>
         /// Gets the value of the first Type property that contains the provided attribute.
         /// </summary>
@@ -52,6 +51,5 @@ namespace CommonsLib_DAL.Extensions
             var propInfo = ObjectAttributesUtils.GetPropertyInfoForAttribute<TAttribute>(instance.GetType());
             return propInfo?.Name ?? string.Empty;
         }
-        
     }
 }

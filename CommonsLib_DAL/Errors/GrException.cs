@@ -5,15 +5,15 @@ namespace CommonsLib_DAL.Errors
     /// <summary>
     /// General Application Exception Class.
     /// </summary>
-    public class GrException: SystemException
+    public class GrException : SystemException
     {
         public IErrorCode ErrorCode { get; }
 
         public GrException(
-            string? message = null, 
+            string? message = null,
             IErrorCode? errorCode = null,
             Exception? cause = null
-            )
+        )
             : base(message, cause)
         {
             ErrorCode = errorCode ?? CommonErrorCodes.UnknownError;
@@ -30,13 +30,11 @@ namespace CommonsLib_DAL.Errors
             GrException grException;
             if (ex is GrException exception)
                 grException = exception;
-            else if(ex.InnerException is GrException innerException)
+            else if (ex.InnerException is GrException innerException)
                 grException = innerException;
             else
                 grException = new GrException(errorMessage ?? ex.Message, cause: ex);
             return grException;
         }
-        
     }
-
 }

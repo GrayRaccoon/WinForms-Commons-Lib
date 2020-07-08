@@ -5,9 +5,8 @@ namespace CommonsLib_IOC.Config
     /// <summary>
     /// IoC Container Resolver.
     /// </summary>
-    public interface IResolver: IDisposable
+    public interface IResolver : IDisposable
     {
-
         /// <summary>
         /// Resolves an Instance of Certain Type.
         /// </summary>

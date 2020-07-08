@@ -10,7 +10,7 @@ using SQLite;
 namespace CommonsLib_CoreTests.DATA.Repositories.Impl
 {
     [TestFixture]
-    public class SyncableDataRepositoryTests: BaseTestClass
+    public class SyncableDataRepositoryTests : BaseTestClass
     {
         private const string Post1Title1 = "My Test";
         private const string Post1Content1 = "Nice Post content For my test";
@@ -51,10 +51,10 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             Assert.NotNull(samplePost2);
 
             await Task.Delay(1200);
-            
+
             var lastSuccessfulSync = await lastSuccessfulSyncRepository.FindByTableIdAndBackendId(tableName);
             Assert.IsNotNull(lastSuccessfulSync);
-            
+
             var pendingToSync = await postsRepository.FindAllPendingToSync(
                 lastSuccessfulSync.SyncTimestamp, new[] {3});
             Assert.IsNotNull(pendingToSync);
@@ -65,7 +65,7 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             lastSuccessfulSync.SyncTimestamp = DateTimeOffset.Now;
             lastSuccessfulSync = await lastSuccessfulSyncRepository.Save(lastSuccessfulSync);
             Assert.IsNotNull(lastSuccessfulSync);
-            
+
             pendingToSync = await postsRepository.FindAllPendingToSync(lastSuccessfulSync.SyncTimestamp, 3);
             Assert.IsNotNull(pendingToSync);
             Assert.IsEmpty(pendingToSync);
@@ -74,40 +74,40 @@ namespace CommonsLib_CoreTests.DATA.Repositories.Impl
             samplePost1.Title += " extra.";
             samplePost1 = await postsRepository.Save(samplePost1);
             Assert.IsNotNull(samplePost1);
-            
+
             pendingToSync = await postsRepository.FindAllPendingToSync(lastSuccessfulSync.SyncTimestamp, 3);
             Assert.IsNotNull(pendingToSync);
             Assert.IsNotEmpty(pendingToSync);
             Assert.AreEqual(1, pendingToSync.Count);
-
         }
 
 
-        private interface IPostsRepository : ISyncableDataRepository<PostEntity, int> { }
-        private class PostsRepository : SyncableDataRepository<PostEntity, int>, IPostsRepository { }
+        private interface IPostsRepository : ISyncableDataRepository<PostEntity, int>
+        { }
+
+        private class PostsRepository : SyncableDataRepository<PostEntity, int>, IPostsRepository
+        { }
+
         [Table("post")]
         private class PostEntity
         {
             [Column("post_id"), PrimaryKey, AutoIncrement]
             public int PostId { get; set; }
 
-            [Column("title"), NotNull]
-            public string Title { get; set; }
-            [Column("content"), NotNull]
-            public string Content { get; set; }
-        
+            [Column("title"), NotNull] public string Title { get; set; }
+            [Column("content"), NotNull] public string Content { get; set; }
+
             [IsDeletedFlagColumn(IsDeletedValue = true)]
             [Column("is_deleted"), NotNull]
             public bool IsDeleted { get; set; }
-            
+
             [CreatedAtColumn]
             [Column("created_at"), NotNull]
             public DateTimeOffset CreatedAt { get; set; }
-            
+
             [UpdatedAtColumn]
             [Column("updated_at"), NotNull]
             public DateTimeOffset UpdatedAt { get; set; }
-        }        
+        }
     }
-
 }

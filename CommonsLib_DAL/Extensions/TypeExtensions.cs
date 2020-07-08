@@ -8,7 +8,6 @@ namespace CommonsLib_DAL.Extensions
     /// </summary>
     public static class TypeExtensions
     {
-
         /// <summary>
         /// Detects whether or not given type has given attribute.
         /// </summary>
@@ -32,6 +31,16 @@ namespace CommonsLib_DAL.Extensions
         {
             return ObjectAttributesUtils.GetAttributeFor<TAttribute>(type);
         }
-        
+
+        /// <summary>
+        /// Checks whether given type is same of parent of current type. 
+        /// </summary>
+        /// <param name="type">type to validate</param>
+        /// <param name="baseType">Potential base type.</param>
+        /// <returns>Whether or not given type is subtype of this type.</returns>
+        public static bool IsSameOrSubclassOf(this Type type, Type baseType)
+        {
+            return type == baseType || type.IsSubclassOf(baseType);
+        }
     }
 }

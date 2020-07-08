@@ -16,7 +16,7 @@ namespace CommonsLib_FLL.Controls
     public class GrIndeterminateProgressBar : BaseProgressBar
     {
         public static readonly int DefaultUpdateTime = 27;
-        public static readonly int[] InitialPoints = { 0, 33, 66 };
+        public static readonly int[] InitialPoints = {0, 33, 66};
         public static readonly int BarLineLength = 25;
 
         // Private attributes
@@ -48,14 +48,15 @@ namespace CommonsLib_FLL.Controls
                 var allLines = new List<Line>();
                 if (!this.IsRunning)
                 {
-                    allLines.Add(new Line() { StartPoint = 0, EndPoint = 100 });
+                    allLines.Add(new Line() {StartPoint = 0, EndPoint = 100});
                     return allLines;
                 }
+
                 this._startPoints.ToList().ForEach(startPoint =>
                 {
                     allLines.AddRange(
                         GetLinesToDrawFor(startPoint)
-                        );
+                    );
                 });
                 return allLines;
             }
@@ -65,7 +66,8 @@ namespace CommonsLib_FLL.Controls
         /// <summary>
         /// Public Constructor that calls to base constructor.
         /// </summary>
-        public GrIndeterminateProgressBar() : base() { }
+        public GrIndeterminateProgressBar() : base()
+        { }
 
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace CommonsLib_FLL.Controls
             {
                 return;
             }
+
             IsRunning = true;
             _bgTask = new BackgroundWorker
             {
@@ -84,16 +87,9 @@ namespace CommonsLib_FLL.Controls
                 WorkerReportsProgress = true
             };
             _bgTask.DoWork += BackgroundWork;
-            _bgTask.ProgressChanged += delegate
-            {
-                this.PerformLayout();
-            };
-            _bgTask.RunWorkerCompleted += delegate
-            {
-                DoEnd();
-            };
+            _bgTask.ProgressChanged += delegate { this.PerformLayout(); };
+            _bgTask.RunWorkerCompleted += delegate { DoEnd(); };
             _bgTask.RunWorkerAsync(_bgTask);
-
         }
 
         /// <summary>
@@ -113,7 +109,7 @@ namespace CommonsLib_FLL.Controls
         /// <param name="e">Event Arguments</param>
         private void BackgroundWork(object sender, DoWorkEventArgs e)
         {
-            var localBgTask = (BackgroundWorker)e.Argument;
+            var localBgTask = (BackgroundWorker) e.Argument;
             while (true)
             {
                 Thread.Sleep(UpdateEachMs);
@@ -137,10 +133,7 @@ namespace CommonsLib_FLL.Controls
         /// </summary>
         protected override void OnProgressBarDraw()
         {
-            this.AllLines.ForEach(line =>
-            {
-                this.DrawPercentage(line.StartPoint, line.EndPoint);
-            });
+            this.AllLines.ForEach(line => { this.DrawPercentage(line.StartPoint, line.EndPoint); });
         }
 
 
@@ -157,7 +150,8 @@ namespace CommonsLib_FLL.Controls
 
             if (endPoint <= 100)
             {
-                lines2draw.Add(new Line() {
+                lines2draw.Add(new Line()
+                {
                     StartPoint = startPoint,
                     EndPoint = endPoint
                 });
@@ -186,7 +180,7 @@ namespace CommonsLib_FLL.Controls
         /// </summary>
         private void IncreaseStartPoints()
         {
-            for (var i=0; i < _startPoints.Length ;i++)
+            for (var i = 0; i < _startPoints.Length; i++)
             {
                 _startPoints[i] = IncreaseStartPoint(_startPoints[i]);
             }
@@ -204,9 +198,9 @@ namespace CommonsLib_FLL.Controls
             {
                 point -= 100;
             }
+
             return point;
         }
-
 
 
         /// <summary>
@@ -218,7 +212,6 @@ namespace CommonsLib_FLL.Controls
             DoEnd();
             base.Dispose(disposing);
         }
-
     }
 
     /// <summary>

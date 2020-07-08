@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-07-06
+
+### Corrected schema validation on SQLiteBootstrapInitializer
+### DataRepository now includes some soft/hard deletion methods.
+
 ## [1.0.3] - 2020-04-26
 
 ### Added ReadOnly Repository (for views).

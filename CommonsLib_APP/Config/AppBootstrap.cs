@@ -15,11 +15,13 @@ namespace CommonsLib_APP.Config
     /// <summary>
     /// Application Base Configuration bootstrap.
     /// </summary>
-    public class AppBootstrap
+    public sealed class AppBootstrap
     {
-        private AppBootstrap() {}
+        private AppBootstrap()
+        { }
+
         public static readonly AppBootstrap Self = new AppBootstrap();
-        
+
         /// <summary>
         /// Component Services namespaces list.
         /// </summary>
@@ -68,6 +70,7 @@ namespace CommonsLib_APP.Config
 
             //Order Bootstrap Initializers.
             var bootstrapInitializers = BootstrapInitializers
+                .Distinct()
                 .OrderBy(init => init.Order)
                 .ThenBy(init => init.InitializerName)
                 .ToList();
@@ -99,8 +102,8 @@ namespace CommonsLib_APP.Config
                 OnInitializerStatusChanged?.Invoke($"Running: {initializerName}");
                 await appInitializer.DoInitialize();
             }
+
             OnInitializerStatusChanged?.Invoke("All done!");
         }
-
     }
 }

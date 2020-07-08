@@ -8,7 +8,7 @@ namespace CommonsLib_DAL.Data.Impl
     public class Page<T> : IPage<T>
     {
         /// <inheritdoc/>
-        public IPageable PageInfo { get; private set; } = Pageable.Of(0,0);
+        public IPageable PageInfo { get; private set; } = Pageable.Of(0, 0);
 
         /// <inheritdoc/>
         public List<T> Content { get; private set; } = new List<T>(Enumerable.Empty<T>());
@@ -41,6 +41,5 @@ namespace CommonsLib_DAL.Data.Impl
                 Total = total
             };
         }
-
     }
 }

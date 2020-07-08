@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GR.CommonsLib.FLL")]
-[assembly: AssemblyDescription("Windows Forms Commons project for Forms Library Layer.")]
+[assembly: AssemblyDescription(".Net Commons project for Forms Library Layer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Gray Raccoon")]
 [assembly: AssemblyProduct("GR.CommonsLib.FLL")]

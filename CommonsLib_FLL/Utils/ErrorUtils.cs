@@ -10,7 +10,6 @@ namespace CommonsLib_FLL.Utils
     /// </summary>
     public static class ErrorUtils
     {
-
         /// <summary>
         /// Displays an error message from an exception.
         /// </summary>
@@ -20,11 +19,9 @@ namespace CommonsLib_FLL.Utils
         public static void DisplayError(ILogger logger, string errorMessage, Exception ex)
         {
             var grException = GrException.From(ex, errorMessage);
-            logger.Error(grException, 
+            logger.Error(grException,
                 $"{grException.ErrorCode} - {grException.Message} - {errorMessage}");
             MessageBox.Show(errorMessage);
         }
-        
     }
-
 }

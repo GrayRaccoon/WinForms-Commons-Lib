@@ -15,7 +15,7 @@ namespace CommonsLib_FLL.Controls
     {
         // Private attributes
         private int _value = 0;
-        
+
 
         /// <summary>
         /// Current Percentage Value.
@@ -38,7 +38,8 @@ namespace CommonsLib_FLL.Controls
         /// <summary>
         /// Public Constructor that calls to base constructor.
         /// </summary>
-        public GrProgressBar() : base() { }
+        public GrProgressBar() : base()
+        { }
 
 
         /// <summary>
@@ -74,17 +75,17 @@ namespace CommonsLib_FLL.Controls
 
             var increments = pauses + 1;
 
-            var ms4Pauses = (int)(ms * 0.22);
+            var ms4Pauses = (int) (ms * 0.22);
             var ms4Increments = ms - ms4Pauses;
 
             var msPerPause = ms4Pauses / pauses;
             var msPerIncrement = ms4Increments / increments;
 
-            
-            var percentagePerIncrement = 100 / increments;
-            
 
-            for (var i=0; i < pauses; i++)
+            var percentagePerIncrement = 100 / increments;
+
+
+            for (var i = 0; i < pauses; i++)
             {
                 await IncreaseSmoothlyWithin(msPerIncrement, percentagePerIncrement);
                 await Task.Delay(msPerPause);
@@ -127,6 +128,5 @@ namespace CommonsLib_FLL.Controls
                 }
             });
         }
-        
     }
 }

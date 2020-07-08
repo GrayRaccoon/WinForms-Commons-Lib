@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace CommonsLib_CoreTests.BLL.Services.Impl
 {
     [TestFixture]
-    public class ProcessRunnerTests: BaseTestClass
+    public class ProcessRunnerTests : BaseTestClass
     {
         [Test]
         public async Task RunNewProcess_MultiCommand_Success()
@@ -23,7 +23,7 @@ namespace CommonsLib_CoreTests.BLL.Services.Impl
                     "echo FINISHING"
                 },
                 workingDirectory: BasePathManager.BasePath, runner: "sh");
-            
+
             Assert.AreEqual(0, statusCode);
         }
     }

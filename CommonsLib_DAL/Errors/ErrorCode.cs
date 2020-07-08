@@ -9,7 +9,7 @@ namespace CommonsLib_DAL.Errors
         /// Error String Code.
         /// </summary>
         string Code { get; }
-        
+
         /// <summary>
         /// Error Display Message.
         /// </summary>
@@ -19,14 +19,14 @@ namespace CommonsLib_DAL.Errors
     /// <summary>
     /// Simple IErrorCode Implementation.
     /// </summary>
-    public class ErrorCode: IErrorCode
+    public class ErrorCode : IErrorCode
     {
         private ErrorCode(string code, string msg)
         {
             Code = code;
             Message = msg;
         }
-        
+
         /// <inheritdoc/>
         public string Code { get; }
 

@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonsLib_IOC", "CommonsLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonsLib_CoreTests", "CommonsLib_CoreTests\CommonsLib_CoreTests.csproj", "{56FE087C-BF32-471C-BE53-726D7E908CE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonsLib_Droid", "CommonsLib_Droid\CommonsLib_Droid.csproj", "{0C9354AE-7147-4912-822F-3AD250D2B4FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonsLib_iOS", "CommonsLib_iOS\CommonsLib_iOS.csproj", "{F809447B-6DB8-43A7-9A88-E415CD30AE1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{56FE087C-BF32-471C-BE53-726D7E908CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56FE087C-BF32-471C-BE53-726D7E908CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56FE087C-BF32-471C-BE53-726D7E908CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9354AE-7147-4912-822F-3AD250D2B4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9354AE-7147-4912-822F-3AD250D2B4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9354AE-7147-4912-822F-3AD250D2B4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9354AE-7147-4912-822F-3AD250D2B4FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F809447B-6DB8-43A7-9A88-E415CD30AE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F809447B-6DB8-43A7-9A88-E415CD30AE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F809447B-6DB8-43A7-9A88-E415CD30AE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F809447B-6DB8-43A7-9A88-E415CD30AE1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

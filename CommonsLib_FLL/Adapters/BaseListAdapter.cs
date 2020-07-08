@@ -9,14 +9,14 @@ namespace CommonsLib_FLL.Adapters
     /// </summary>
     /// <typeparam name="TItem">Item type.</typeparam>
     public abstract class BaseListAdapter<TItem>
-         where TItem : class, new()
+        where TItem : class, new()
     {
         public ListView InternalListView { get; }
         public List<TItem> InternalList { get; }
-        
+
         private bool _isInitialized = false;
 
-        
+
         /// <summary>
         /// Item Click Event.
         /// </summary>
@@ -28,7 +28,7 @@ namespace CommonsLib_FLL.Adapters
         /// Set String Array with ListView Columns Name.
         /// </summary>
         /// <returns>String Array.</returns>
-        public abstract string[] Names { get; }
+        public abstract IEnumerable<string> Names { get; }
 
         /// <summary>
         /// Set String Array with ListView Items Data.
@@ -43,7 +43,7 @@ namespace CommonsLib_FLL.Adapters
         /// <returns>int Array.</returns>
         public abstract int[] ColWidths { get; }
 
-        
+
         public BaseListAdapter(List<TItem> list, ListView listView)
         {
             this.InternalList = list;
@@ -80,13 +80,13 @@ namespace CommonsLib_FLL.Adapters
             InternalListView.Clear();
             var arrayWidth = ColWidths;
             var indexArray = 0;
-            var widthListView = (int)(InternalListView.Width * 0.96);
+            var widthListView = (int) (InternalListView.Width * 0.96);
 
             //set Columns with width
             foreach (var col in Names)
             {
                 InternalListView.Columns.Add(col);
-                InternalListView.Columns[indexArray].Width = (int)((arrayWidth[indexArray] * widthListView) / 100.0);
+                InternalListView.Columns[indexArray].Width = (int) ((arrayWidth[indexArray] * widthListView) / 100.0);
                 indexArray++;
             }
 
@@ -107,7 +107,7 @@ namespace CommonsLib_FLL.Adapters
             var item = InternalList[index];
             OnItemClicked?.Invoke(item);
         }
-        
+
         /// <summary>
         /// Catch double click event
         /// </summary>
@@ -123,18 +123,16 @@ namespace CommonsLib_FLL.Adapters
         /// Gets the currently selected item, or null if there is no item selected.
         /// </summary>
         /// <returns>Selected Item.</returns>
-        public TItem? SelectedItem
+        public TItem SelectedItem
         {
             get
             {
                 var selectedIndices = InternalListView.SelectedIndices;
                 if (selectedIndices.Count == 0)
-                    return null;
+                    return default;
                 var selectedIndex = selectedIndices[0];
                 return InternalList[selectedIndex];
             }
         }
-
     }
-
 }

@@ -6,17 +6,19 @@ namespace CommonsLib_DAL.Config.Initializer
     /// <summary>
     /// Standard Base Path Bootstrap initializer.
     /// </summary>
-    public class StandardBasePathBootstrapInitializer: IAppInitializer
+    public sealed class StandardBasePathBootstrapInitializer : IAppInitializer
     {
-        private StandardBasePathBootstrapInitializer() {}
+        private StandardBasePathBootstrapInitializer()
+        { }
+
         public static readonly StandardBasePathBootstrapInitializer Self = new StandardBasePathBootstrapInitializer();
-        
+
         /// <inheritdoc/>
         public string InitializerName => "Standard Base Path Initializer";
-        
+
         /// <inheritdoc/>
         public int Order => -9;
-        
+
         /// <summary>
         /// Add Current App Domain Directory as the App Base Path. 
         /// </summary>
@@ -28,6 +30,5 @@ namespace CommonsLib_DAL.Config.Initializer
                 BasePathManager.BasePath = System.AppDomain.CurrentDomain.BaseDirectory;
             });
         }
-
     }
 }

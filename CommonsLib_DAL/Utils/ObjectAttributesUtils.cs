@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace CommonsLib_DAL.Utils
 {
@@ -33,7 +34,7 @@ namespace CommonsLib_DAL.Utils
         {
             return type.GetCustomAttributes<TAttribute>().FirstOrDefault();
         }
-        
+
         /// <summary>
         /// Gets the property name of the first property that contains the provided attribute.
         /// </summary>
@@ -66,7 +67,21 @@ namespace CommonsLib_DAL.Utils
                 select propertyInfo
             ).FirstOrDefault();
         }
-        
-    }
 
+        /// <summary>
+        /// Gets the attribute from the property info of the first property that contains the given attribute.
+        /// </summary>
+        /// <param name="instanceType">Instance type to extract property info attribute.</param>
+        /// <typeparam name="TAttribute">Expected attribute type.</typeparam>
+        /// <returns>Found property info attribute.</returns>
+        public static TAttribute? GetAttributeForAnyFieldIn<TAttribute>(Type instanceType)
+            where TAttribute : Attribute
+        {
+            var propInfo = GetPropertyInfoForAttribute<TAttribute>(instanceType);
+            if (propInfo == default)
+                return null;
+            var cusAttributes = propInfo?.GetCustomAttributes(typeof(TAttribute), true);
+            return (TAttribute?) cusAttributes?[0];
+        }
+    }
 }

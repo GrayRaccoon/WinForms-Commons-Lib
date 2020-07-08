@@ -1,35 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>GR.CommonsLib.DAL</PackageId>
-    <Authors>Heriberto Reyes Esparza</Authors>
-    <Company>Gray Raccoon</Company>
-    <Product>GR.CommonsLib.DAL</Product>
-    <Description>Windows Forms Commons project for Data Access Layer.</Description>
-    <Copyright>Copyright 2020 CompanyLtd</Copyright>
-    <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
-    <PackageIconUrl>https://www.grayraccoon.com/images/logo.png</PackageIconUrl>
-    <RepositoryUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>dotNet WinForms GR</PackageTags>
-    <PackageReleaseNotes>Initial 1.0.1 release</PackageReleaseNotes>
-    <NeutralLanguage />
-    <ApplicationIcon></ApplicationIcon>
-    <Version>1.0.1</Version>
-    <LangVersion>8</LangVersion>
-    <Nullable>enable</Nullable>
-    <Title>Gr Commons Lib DAL</Title>
-    <PackageVersion>1.1.2</PackageVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>GR.CommonsLib.DAL</PackageId>
+        <Authors>Heriberto Reyes Esparza</Authors>
+        <Company>Gray Raccoon</Company>
+        <Product>GR.CommonsLib.DAL</Product>
+        <Description>.Net Commons project for Data Access Layer.</Description>
+        <Copyright>Copyright 2020 CompanyLtd</Copyright>
+        <PackageLicenseUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib/raw/master/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</PackageProjectUrl>
+        <PackageIconUrl>https://www.grayraccoon.com/images/logo.png</PackageIconUrl>
+        <RepositoryUrl>https://gitlab.com/GrayRaccoon/winforms-commons-lib</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>dotNet WinForms GR</PackageTags>
+        <PackageReleaseNotes>Initial 1.0.1 release</PackageReleaseNotes>
+        <NeutralLanguage />
+        <ApplicationIcon></ApplicationIcon>
+        <Version>1.0.1</Version>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+        <Title>Gr Commons Lib DAL</Title>
+        <PackageVersion>1.1.3</PackageVersion>
+        <AssemblyVersion>1.1.3</AssemblyVersion>
+        <FileVersion>1.1.3</FileVersion>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Serilog" Version="2.9.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    </ItemGroup>
 
 </Project>

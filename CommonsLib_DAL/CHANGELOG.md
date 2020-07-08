@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 2020-07-06
+
+### Dictionary extension get or default.
+### Type extension is type or subtype.
+### Get Attribute for first matching property on ObjectAttributesUtils.
+
 ## [1.1.2] - 2020-06-20
 
 ### Removed console sink from default Serilog MainLogger.
