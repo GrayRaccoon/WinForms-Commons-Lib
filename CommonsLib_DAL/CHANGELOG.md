@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.4] - 2020-07-18
+
+### New Object Attributes utilities.
+### Added quick property info extension to get custom property
+
 ## [1.1.3] - 2020-07-06
 
 ### Dictionary extension get or default.
