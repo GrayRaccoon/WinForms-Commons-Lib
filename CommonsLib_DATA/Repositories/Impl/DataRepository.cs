@@ -24,7 +24,7 @@ namespace CommonsLib_DATA.Repositories.Impl
         {
             var now = DateTimeOffset.Now;
 
-            var entityId = entity.GetValueForAttribute<TId, PrimaryKeyAttribute>();
+            var entityId = entity.GetPropertyValueForAttribute<TId, PrimaryKeyAttribute>();
             var hasId = entityId != null && !entityId.Equals(default(TId));
 
             if (updateTimestamp)
@@ -98,7 +98,8 @@ namespace CommonsLib_DATA.Repositories.Impl
                 var entitiesTask = FindAll();
                 entitiesTask.Wait();
                 var entities = entitiesTask.Result;
-                foreach (var id in entities.Select(entity => entity.GetValueForAttribute<TId, PrimaryKeyAttribute>()))
+                foreach (var id in entities
+                    .Select(entity => entity.GetPropertyValueForAttribute<TId, PrimaryKeyAttribute>()))
                     DeleteById(id, softDelete).Wait();
                 
             });

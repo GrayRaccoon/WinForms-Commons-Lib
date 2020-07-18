@@ -186,6 +186,18 @@ namespace CommonsLib_iOS.Screen
                     .Where(vc => Equals(this, vc))
                     .ToArray();
         }
-        
+
+        /// <summary>
+        /// Starts a new screen.
+        /// </summary>
+        /// <param name="viewController">Screen to start.</param>
+        public void StartScreen(UIViewController viewController)
+        {
+            if (NavigationController != null)
+                NavigationController.PushViewController(viewController, true);
+            else
+                PresentViewController(viewController, true, null);
+        }
+
     }
 }
