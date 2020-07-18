@@ -15,7 +15,7 @@ namespace CommonsLib_DAL.Extensions
         /// <typeparam name="TObject">Expected property return type.</typeparam>
         /// <typeparam name="TAttribute">Expected Attribute type</typeparam>
         /// <returns>Found property value for the attribute.</returns>
-        public static TObject GetValueForAttribute<TObject, TAttribute>(
+        public static TObject GetPropertyValueForAttribute<TObject, TAttribute>(
             this object instance)
             where TAttribute : Attribute
         {
