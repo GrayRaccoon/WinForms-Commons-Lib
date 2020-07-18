@@ -68,6 +68,7 @@ namespace CommonsLib_Droid.Screen
             
             SetContentView(ScreenResourceId);
             Cheeseknife.Bind(this);
+            LoadExtras();
             
             ScreenToolbar = FindViewById(ScreenToolbarId) 
                 as Android.Support.V7.Widget.Toolbar;

@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.1] - 2020-07-18
+## [0.1.2] - 2020-07-18
 
 ### Automatic set screen content.
 ### Automatic set toolbar 
-### Simplified sending extra params.
+### Simplified sending extra params as objects.
 
 ## [0.1.0] - 2020-07-06
 
