@@ -3,7 +3,7 @@
 <package>
     <metadata>
         <id>GR.CommonsLib.iOS</id>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
         <title>GR WinForms Commons-Lib iOS</title>
         <authors>Heriberto Reyes Esparza</authors>
         <owners>Gray Raccoon</owners>

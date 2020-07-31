@@ -150,14 +150,16 @@ namespace CommonsLib_iOS.Screen
 
             NavigationController.NavigationBar.BarTintColor = UiHelper.UiColorFromHex(hexToolbarBgColor);
             if (hexToolbarTitleColor == null) return;
+            var toolbarTitleColor = UiHelper.UiColorFromHex(hexToolbarTitleColor);
+            NavigationController.NavigationBar.TintColor = toolbarTitleColor;
             if (NavigationController.NavigationBar.TitleTextAttributes == null)
                 NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes
                 {
-                    ForegroundColor = UiHelper.UiColorFromHex(hexToolbarTitleColor)
+                    ForegroundColor = toolbarTitleColor
                 };
             else
                 NavigationController.NavigationBar.TitleTextAttributes
-                    .ForegroundColor = UiHelper.UiColorFromHex(hexToolbarTitleColor);
+                    .ForegroundColor = toolbarTitleColor;
         }
         
         /// <summary>
