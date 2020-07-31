@@ -4,7 +4,7 @@ using UIKit;
 
 namespace CommonsLib_iOS.Helper
 {
-    public class UiHelper
+    public static class UiHelper
     {
 
         /// <summary>
@@ -13,10 +13,10 @@ namespace CommonsLib_iOS.Helper
         /// <param name="hexString">Hex string to parse.</param>
         /// <returns>Built UIColor</returns>
         /// <exception cref="ArgumentException">If given hex string format is invalid.</exception>
-        public static UIColor FromHex(string hexString)
+        public static UIColor UiColorFromHex(string hexString)
         {
             var colorString = hexString.Replace("#", string.Empty);
-            nfloat GetDecimalValueFrom(string str)
+            static nfloat GetDecimalValueFrom(string str)
             {
                 var fullHex = str.Length == 2 ? str : $"{str}{str}";
                 var hexComponent = int.Parse(fullHex, NumberStyles.HexNumber);

@@ -1,11 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.Text;
 using Android.Support.V7.App;
+using Android.Views;
 using Android.Widget;
 using CheeseBind;
 using CommonsLib_APP.Screen;
+using CommonsLib_APP.Settings;
 using CommonsLib_DAL.Extensions;
 using CommonsLib_DAL.Utils;
 using CommonsLib_Droid.Attributes;
@@ -59,6 +64,8 @@ namespace CommonsLib_Droid.Screen
         /// Current Screen toolbar
         /// </summary>
         protected Android.Support.V7.Widget.Toolbar ScreenToolbar { get; set; }
+
+        private string ToolbarTitleColor { get; set; } = null;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -75,6 +82,8 @@ namespace CommonsLib_Droid.Screen
             if (ScreenToolbar != null)
                 SetSupportActionBar(ScreenToolbar);
 
+            LoadCustomScreenTint();
+            
             ScreenCreate += OnCreate;
             RunOnUiThread(() => ScreenCreate?.Invoke());
         }
@@ -113,8 +122,44 @@ namespace CommonsLib_Droid.Screen
         {
             if (SupportActionBar == null) return;
             SupportActionBar.Title = title;
+            if (ToolbarTitleColor == null) return;
+            UpdateToolbarTitleColor(ToolbarTitleColor);
+        }
+
+        protected void UpdateToolbarTitleColor(string hexColor)
+        {
+            SupportActionBar.TitleFormatted = HtmlCompat.FromHtml(
+                $"<font color='{hexColor}'>{SupportActionBar.Title}</font>",
+                HtmlCompat.FromHtmlModeLegacy);
         }
         
+        /// <inheritdoc cref="IAppScreen{TScreenCtx}"/>
+        public void SetScreenTint(string hexToolbarBgColor, 
+            string hexToolbarTitleColor = null,
+            string hexSystemColor = null)
+        {
+            if (SupportActionBar == null) return;
+            
+            var colorDrawable = new ColorDrawable(Color.ParseColor(hexToolbarBgColor));
+            SupportActionBar.SetBackgroundDrawable(colorDrawable);
+
+            if (!string.IsNullOrEmpty(hexToolbarTitleColor))
+                UpdateToolbarTitleColor(hexToolbarTitleColor);
+
+            if (!string.IsNullOrEmpty(hexSystemColor) && Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
+                Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                var systemColor = Color.ParseColor(hexSystemColor);
+                Window.SetStatusBarColor(systemColor);
+                Window.SetNavigationBarColor(systemColor);
+            }
+
+            SupportActionBar.SetDisplayShowTitleEnabled(false);
+            SupportActionBar.SetDisplayShowTitleEnabled(true);
+        }
+
         /// <summary>
         /// Sets home button to return previous activity,
         /// ParentActivity needs to be configured.
@@ -126,6 +171,18 @@ namespace CommonsLib_Droid.Screen
             SupportActionBar.SetDisplayShowCustomEnabled(true);
         }
 
+        /// <summary>
+        /// Loads global screen tint if it is enabled.
+        /// </summary>
+        protected void LoadCustomScreenTint()
+        {
+            if (!GlobalTintSettings.UseCustomTint) return;
+            
+            SetScreenTint(GlobalTintSettings.ToolbarBackgroundColor,
+                hexToolbarTitleColor: GlobalTintSettings.ToolbarTitleColor,
+                hexSystemColor: GlobalTintSettings.SystemStatusColor);
+        }
+        
         /// <inheritdoc cref="IAppScreen{TScreenCtx}"/>
         public void ShowToast(string msg)
         {
