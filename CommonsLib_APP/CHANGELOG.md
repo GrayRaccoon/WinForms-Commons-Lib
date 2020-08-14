@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2020-07-30
+
+### Added Option to configure screen tint globally.
+
 ## [1.0.3] - 2020-07-06
 
 ### Added IAppScreen as base interface for mobile app screens.

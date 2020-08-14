@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CommonsLib_APP.Screen;
+using CommonsLib_APP.Settings;
 using CommonsLib_IOC.Config;
+using CommonsLib_iOS.Helper;
 using Foundation;
 using GlobalToast;
 using Serilog;
@@ -58,6 +60,8 @@ namespace CommonsLib_iOS.Screen
             ScreenDestroy += OnDestroy;
             
             AddAppStatusEvents();
+
+            LoadCustomScreenTint();
             
             RunOnUiThread(() => ScreenCreate?.Invoke());
         }
@@ -135,6 +139,39 @@ namespace CommonsLib_iOS.Screen
             if (NavigationItem == null)
                 return;
             NavigationItem.Title = title;
+        }
+
+        /// <inheritdoc cref="IAppScreen{TScreenCtx}"/>
+        public void SetScreenTint(string hexToolbarBgColor,
+            string hexToolbarTitleColor = null,
+            string hexSystemColor = null)
+        {
+            if (NavigationController?.NavigationBar == null) return;
+
+            NavigationController.NavigationBar.BarTintColor = UiHelper.UiColorFromHex(hexToolbarBgColor);
+            if (hexToolbarTitleColor == null) return;
+            var toolbarTitleColor = UiHelper.UiColorFromHex(hexToolbarTitleColor);
+            NavigationController.NavigationBar.TintColor = toolbarTitleColor;
+            if (NavigationController.NavigationBar.TitleTextAttributes == null)
+                NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes
+                {
+                    ForegroundColor = toolbarTitleColor
+                };
+            else
+                NavigationController.NavigationBar.TitleTextAttributes
+                    .ForegroundColor = toolbarTitleColor;
+        }
+        
+        /// <summary>
+        /// Loads global screen tint if it is enabled.
+        /// </summary>
+        protected void LoadCustomScreenTint()
+        {
+            if (!GlobalTintSettings.UseCustomTint) return;
+            
+            SetScreenTint(GlobalTintSettings.ToolbarBackgroundColor,
+                hexToolbarTitleColor: GlobalTintSettings.ToolbarTitleColor,
+                hexSystemColor: GlobalTintSettings.SystemStatusColor);
         }
 
         /// <inheritdoc cref="IAppScreen{TScreenCtx}"/>

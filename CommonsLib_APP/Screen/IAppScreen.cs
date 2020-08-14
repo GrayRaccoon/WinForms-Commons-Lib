@@ -42,6 +42,15 @@ namespace CommonsLib_APP.Screen
         void SetScreenTitle(string title);
 
         /// <summary>
+        /// Sets Screen tint based on params
+        /// </summary>
+        /// <param name="hexToolbarBgColor">Screen Toolbar Background Color.</param>
+        /// <param name="hexToolbarTitleColor">Screen Toolbar Text Color.</param>
+        /// <param name="hexSystemColor">Screen System Color.</param>
+        void SetScreenTint(string hexToolbarBgColor, string hexToolbarTitleColor = null, 
+            string hexSystemColor = null);
+        
+        /// <summary>
         /// Displays quick toast message.
         /// </summary>
         /// <param name="msg">message to display</param>

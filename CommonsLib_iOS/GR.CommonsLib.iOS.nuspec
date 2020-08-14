@@ -3,7 +3,7 @@
 <package>
     <metadata>
         <id>GR.CommonsLib.iOS</id>
-        <version>0.1.1</version>
+        <version>0.1.3</version>
         <title>GR WinForms Commons-Lib iOS</title>
         <authors>Heriberto Reyes Esparza</authors>
         <owners>Gray Raccoon</owners>
@@ -19,6 +19,7 @@
             <group targetFramework="Xamarin.iOS10">
                 <dependency id="GR.CommonsLib.DAL" version="1.1.4" />
                 <dependency id="GR.CommonsLib.BLL" version="1.1.3" />
+                <dependency id="GR.CommonsLib.APP" version="1.0.4" />
             </group>
         </dependencies>
         <summary>.Net Commons project for iOS Layer.</summary>
