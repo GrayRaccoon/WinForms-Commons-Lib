@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>GR.CommonsLib.APP</PackageId>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.0.5</PackageVersion>
         <Title>Gr Commons Lib APP</Title>
         <Authors>Heriberto Reyes Esparza</Authors>
         <Description>.Net Commons project for App base configuration.</Description>
