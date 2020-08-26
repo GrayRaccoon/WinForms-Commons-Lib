@@ -28,9 +28,8 @@ namespace CommonsLib_iOS.Screen
         private Toast _toast;
         
         private bool _isScreenResume = false;
-        private NSObject _willResignActiveNotificationObserver;
-        private NSObject _didBecomeActiveNotificationObserver;
-        private NSObject _didDisconnectNotificationObserver;
+        private NSObject? _willResignActiveNotificationObserver;
+        private NSObject? _didBecomeActiveNotificationObserver;
         
         public BaseViewController(IntPtr handle) : base(handle) { }
 
@@ -78,6 +77,7 @@ namespace CommonsLib_iOS.Screen
         {
             base.ViewWillDisappear(animated);
             NotifyScreenMightPause();
+            NotifyScreenMightDestroy();
         }
 
         protected virtual void OnCreate() { }
@@ -98,25 +98,21 @@ namespace CommonsLib_iOS.Screen
             if (_willResignActiveNotificationObserver == null)
                 _willResignActiveNotificationObserver = UIApplication.Notifications.ObserveWillResignActive( 
                     delegate { NotifyScreenMightPause(); });
-            
-            if (_didDisconnectNotificationObserver == null)
-                _didDisconnectNotificationObserver = UIScene.Notifications.ObserveDidDisconnect(delegate
-                    {
-                        RemoveAppStatusEvents();
-                        RunOnUiThread(() => ScreenDestroy?.Invoke());
-                    });
         }
 
         private void RemoveAppStatusEvents()
         {
             if (_didBecomeActiveNotificationObserver != null)
+            {
                 NSNotificationCenter.DefaultCenter.RemoveObserver(_didBecomeActiveNotificationObserver);
+                _didBecomeActiveNotificationObserver = null;
+            }
 
-            if (_willResignActiveNotificationObserver == null)
+            if (_willResignActiveNotificationObserver != null)
+            {
                 NSNotificationCenter.DefaultCenter.RemoveObserver(_willResignActiveNotificationObserver);
-            
-            if (_didDisconnectNotificationObserver == null)
-                NSNotificationCenter.DefaultCenter.RemoveObserver(_didDisconnectNotificationObserver);
+                _willResignActiveNotificationObserver = null;   
+            }
         }
 
         private void NotifyScreenMightResume()
@@ -131,6 +127,22 @@ namespace CommonsLib_iOS.Screen
             if (!_isScreenResume) return;
             RunOnUiThread(() => ScreenPause?.Invoke());
             _isScreenResume = false;
+        }
+
+        private void NotifyScreenMightDestroy()
+        {
+            NotifyScreenMightPause();
+
+            var destroy = false;
+            var hasNVC = NavigationController != null;
+            if (hasNVC && !NavigationController.ViewControllers.Contains(this))
+                destroy = true;
+            else if (!hasNVC && IsBeingDismissed)
+                destroy = true;
+
+            if (!destroy) return;
+            RemoveAppStatusEvents();
+            RunOnUiThread(() => ScreenDestroy?.Invoke());
         }
 
         /// <inheritdoc cref="IAppScreen{TScreenCtx}"/>
@@ -219,9 +231,13 @@ namespace CommonsLib_iOS.Screen
             else if (Equals(this, NavigationController.VisibleViewController))
                 NavigationController.PopViewController(true);
             else if (NavigationController.ViewControllers.Contains(this))
+            {
                 NavigationController.ViewControllers = NavigationController.ViewControllers
                     .Where(vc => Equals(this, vc))
                     .ToArray();
+                
+                NotifyScreenMightDestroy();
+            }
         }
 
         /// <summary>
