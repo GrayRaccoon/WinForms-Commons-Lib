@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
@@ -17,7 +17,7 @@
         <Deterministic>True</Deterministic>
         <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
         <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-        <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
         <AndroidUseAapt2>true</AndroidUseAapt2>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,9 +64,9 @@
         <PackageReference Include="MisterJimson.Cheeseknife" Version="1.1.0" />
         <PackageReference Include="Serilog" Version="2.9.0" />
         <PackageReference Include="Serilog.Sinks.Xamarin" Version="0.2.0.64" />
-        <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
+        <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.0.2-preview02" />
         <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-    </ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0-preview03" /></ItemGroup>
     <ItemGroup>
         <AndroidResource Include="Resources\values\strings.xml" />
     </ItemGroup>

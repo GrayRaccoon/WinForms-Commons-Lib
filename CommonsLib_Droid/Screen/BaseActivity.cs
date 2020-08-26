@@ -4,10 +4,10 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.Text;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
+using AndroidX.Core.Text;
 using CheeseBind;
 using CommonsLib_APP.Screen;
 using CommonsLib_APP.Settings;
@@ -63,7 +63,7 @@ namespace CommonsLib_Droid.Screen
         /// <summary>
         /// Current Screen toolbar
         /// </summary>
-        protected Android.Support.V7.Widget.Toolbar ScreenToolbar { get; set; }
+        protected AndroidX.AppCompat.Widget.Toolbar ScreenToolbar { get; set; }
 
         private string ToolbarTitleColor { get; set; } = null;
         
@@ -78,7 +78,7 @@ namespace CommonsLib_Droid.Screen
             LoadExtras();
             
             ScreenToolbar = FindViewById(ScreenToolbarId) 
-                as Android.Support.V7.Widget.Toolbar;
+                as AndroidX.AppCompat.Widget.Toolbar;
             if (ScreenToolbar != null)
                 SetSupportActionBar(ScreenToolbar);
 
